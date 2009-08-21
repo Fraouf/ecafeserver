@@ -1,0 +1,263 @@
+
+"fr-FR":
+  config: "Configuration"
+  logout: "Se déconnecter"
+  login: "Se connecter"
+  username: "Nom d'utilisateur"
+  password: "Mot de passe"
+  index: "Accueil"
+  name: "Nom complet"
+  password_confirmation: "Confirmer le mot de passe"
+  admin: "Admin"
+  add: "Ajouter"
+  delete: "Supprimer"
+  edit: "Editer"
+  my_profile: "Mon profil"
+  title: "Titre"
+  never: "Jamais"
+  unlimited: "Illimité"
+  timecode: "Code-temps"
+  time_left: "Temps restant"
+  model: "Modèle"
+  statistics: "Statistiques"
+  credits: "Crédits"
+  email: "Email"
+  phone: "Téléphone"
+  question: "Question"
+  answer: "Réponse"
+  ip_address: "Adresse IP"
+  session_id: "ID de session"
+  hostname: "Nom d'hôte"
+  state: "Etat"
+  configuration:
+    changed_successfully: "La configuration a bien été modifiée. Veuillez recharger la page."
+    invalid_locale: "Langue invalide"
+    change: "Changer la configuration"
+    country: "Langue et pays"
+  employees:
+    employees: "Employés"
+    password: "Le mot de passe"
+    password_confirmation: "La confirmation du mot de passe"
+    add_failed: "Le nouvel employé n'a pas pu être ajouté"
+    edit_failed: "Cet employé n'a pas pu être modifié"
+    edit_profile_failed: "Votre profil n'a pas pu être sauvegardé"
+    add_new: "Ajouter un nouvel employé"
+    added_successfully: "L'employé a bien été ajouté"
+    deleted_successfully: "L'employé a été supprimé avec succès"
+    is_admin: "Cochez la case si cet employé est un administrateur:"
+    edit_header: "Modification d'un employé"
+    edit_successful: "L'employé a bien été modifié"
+    edit_profile_header: "Editer mon profil"
+    edit_profile: "Modifier mon profil"
+    edit_profile_successful: "Votre profil a bien été modifié"
+  models:
+    models: "Modèles"
+    add_new: "Ajouter un nouveau modèle"
+    price: "Prix (en €)"
+    expiration: "Expiration (en jours)"
+    time: "Temps (en minutes)"
+    add_new: "Ajouter un nouveau modèle"
+    add_failed: "Le nouveau modèle n'a pas pu être ajouté"
+    added_successfully: "Le nouveau modèle a été ajouté avec succès"
+    destroyed_successfully: "Le modèle a bien été supprimé"
+    edit: "Editer un modèle"
+    edit_failed: "Le modèle n'a pas été modifié"
+    edit_successful: "Le modèle a bien été modifié"
+  timecodes:
+    timecodes: "Code-temps"
+    expiration_date: "Date d'expiration"
+    expires: "Expire"
+    add_new: "Créer un nouveau code-temps"
+    added_successfully: "Le code-temps '{{code}}' a bien été créé"
+    add_failed: "Impossible de créer ce code-temps"
+    destroy_failed: "Vous ne pouvez pas supprimer un code-temps qui a déjà été utilisé"
+    destroyed_successfully: "Le code-temps '{{code}}' a été supprimé"
+  customers:
+    customers: "Membres"
+    add_new: "Ajouter un nouveau membre"
+    added_successfully: "Le membre a bien été ajouté"
+    add_failed: "Le nouveau membre n'a pas pu être ajouté"
+    deleted_successfully: "Le membre a bien été supprimé"
+  clients:
+    clients: "Ordinateurs clients"
+  sessions:
+    login_successful: "Connexion réussie"
+    logout: "Vous avez été déconnecté"
+    login_failed: "Mot de passe ou nom d'utilisateur incorrect"
+  operations:
+    operations: "Opérations"
+    models:
+      create: "MODELE '{{title}}' CREE"
+      destroy: "MODELE '{{title}}' SUPPRIME"
+      update: "MODELE '{{title}}' MIS A JOUR"
+    employees:
+      create: "EMPLOYE '{{login}}' CREE"
+      destroy: "EMPLOYE '{{login}}' SUPPRIME"
+      update: "EMPLOYE '{{login}}' MIS A JOUR"
+      update_profile: "EMPLOYE '{{login}}' A MIS A JOUR SON PROFIL"
+    timecodes:
+      create: "CODE-TEMPS '{{code}}' CREE"
+      destroy: "CODE-TEMPS '{{code}}' SUPPRIME"
+      destroy_failed: "CODE-TEMPS: ESSAI DE SUPPRESSION DU CODE '{{code}}'"
+      connection_not_found: "TENTATIVE DE CONNEXION PAR CODE-TEMPS: '{{code}}'"
+      connection_invalid: "TENTATIVE DE CONNEXION PAR CODE-TEMPS: '{{code}}'"
+      connection: "CONNEXION PAR CODE-TEMPS: '{{code}}'"
+      disconnect: "DECONNEXION CODE-TEMPS: '{{code}}'"
+    customers:
+      create: "MEMBRE '{{login}}' CREE"
+      destroy: "MEMBRE '{{login}}' SUPPRIME"
+      connection_login_invalid: "TENTATIVE DE CONNEXION D'UN MEMBRE (UTILISATEUR INVALIDE): '{{login}}'"
+      connection_password_invalid: "TENTATIVE DE CONNEXION D'UN MEMBRE (MOT DE PASSE INVALIDE): '{{login}}'"
+      connection_no_time_left: "TENTATIVE DE CONNEXION D'UN MEMBRE (PAS DE TEMPS RESTANT): '{{login}}'"
+      connection: "CONNEXION DU MEMBRE '{{login}}'"
+      disconnect: "DECONNEXION MEMBRE: '{{login}}'"
+  date:
+    formats:
+      default: "%d/%m/%Y"
+      short: "%e %b"
+      long: "%e %B %Y"
+      long_ordinal: "%e %B %Y"
+      only_day: "%e"
+ 
+    day_names: [dimanche, lundi, mardi, mercredi, jeudi, vendredi, samedi]
+    abbr_day_names: [dim, lun, mar, mer, jeu, ven, sam]
+    month_names: [~, janvier, février, mars, avril, mai, juin, juillet, août, septembre, octobre, novembre, décembre]
+    abbr_month_names: [~, jan., fév., mar., avr., mai, juin, juil., août, sept., oct., nov., déc.]
+    order: [ :day, :month, :year ]
+  
+  time:
+    formats:
+      default: "%d %B %Y %H:%M"
+      time: "%H:%M"
+      short: "%d %b %H:%M"
+      long: "%A %d %B %Y %H:%M:%S %Z"
+      long_ordinal: "%A %d %B %Y %H:%M:%S %Z"
+      only_second: "%S"
+    am: 'am'
+    pm: 'pm'
+ 
+  datetime:
+    distance_in_words:
+      half_a_minute: "une demi-minute"
+      less_than_x_seconds:
+        zero: "moins d'une seconde"
+        one: "moins de 1 seconde"
+        other: "moins de {{count}} secondes"
+      x_seconds:
+        one: "1 seconde"
+        other: "{{count}} secondes"
+      less_than_x_minutes:
+        zero: "moins d'une minute"
+        one: "moins de 1 minute"
+        other: "moins de {{count}} minutes"
+      x_minutes:
+        one: "1 minute"
+        other: "{{count}} minutes"
+      about_x_hours:
+        one: "environ une heure"
+        other: "environ {{count}} heures"
+      x_days:
+        one: "1 jour"
+        other: "{{count}} jours"
+      about_x_months:
+        one: "environ un mois"
+        other: "environ {{count}} mois"
+      x_months:
+        one: "1 mois"
+        other: "{{count}} mois"
+      about_x_years:
+        one: "environ un an"
+        other: "environ {{count}} ans"
+      over_x_years:
+        one: "plus d'un an"
+        other: "plus de {{count}} ans"
+    prompts:
+      year: "Année"
+      month: "Mois"
+      day: "Jour"
+      hour: "Heure"
+      minute: "Minute"
+      second: "Seconde"
+  
+  number:
+    format:
+      precision: 3
+      separator: ','
+      delimiter: ' '
+    currency:
+      format:
+        unit: '€'
+        precision: 2
+        format: '%n %u'
+    human:
+      format:
+        precision: 2
+      storage_units: 
+        format: "%n %u"
+        units:
+          byte:
+            one: "Octet"
+            other: "Octets"
+          kb: "Ko"
+          mb: "Mo"
+          gb: "Go"
+          tb: "To"
+  
+  support:
+    array:
+      sentence_connector: 'et'
+      skip_last_comma: true
+      words_connector: ", "
+      two_words_connector: " et "
+      last_word_connector: " et "
+  
+  activerecord:
+    errors:
+      template:
+        header:
+          one: "Impossible d'enregistrer {{model}}: 1 erreur"
+          other: "Impossible d'enregistrer {{model}}: {{count}} erreurs."
+        body: "Les erreurs suivantes se sont produites :"
+      messages:
+        inclusion: "n'est pas inclus(e) dans la liste"
+        exclusion: "n'est pas disponible"
+        invalid: "n'est pas valide"
+        confirmation: "ne concorde pas avec la confirmation"
+        accepted: "doit être accepté(e)"
+        empty: "doit être rempli(e)"
+        blank: "doit être rempli(e)"
+        too_long: "est trop long (pas plus de {{count}} caractères)"
+        too_short: "est trop court (au moins {{count}} caractères)"
+        wrong_length: "ne fait pas la bonne longueur (doit comporter {{count}} caractères)"
+        taken: "n'est pas disponible"
+        not_a_number: "n'est pas un nombre"
+        greater_than: "doit être supérieur à {{count}}"
+        greater_than_or_equal_to: "doit être supérieur ou égal à {{count}}"
+        equal_to: "doit être égal à {{count}}"
+        less_than: "doit être inférieur à {{count}}"
+        less_than_or_equal_to: "doit être inférieur ou égal à {{count}}"
+        odd: "doit être impair"
+        even: "doit être pair"
+        employee_login_presence: "Vous devez entrer un nom d'utilisateur"
+        employee_login_length: "Le nom d'utilisateur doit comprendre entre 3 et 40 caractères"
+        employee_login_unique: "Ce nom d'utilisateur existe déjà"
+        employee_name_length: "Le nom d'un employé ne peut pas comprendre plus de 100 caractères"
+        employee_bad_login_message: "Veuillez utiliser uniquement des lettres, des nombres et .-_@ pour le nom d'utilisateur"
+        employee_bad_name_message: "Veuillez éviter les caractères non imprimables dans le nom"
+        customer_login_presence: "Vous devez entrer un nom d'utilisateur"
+        customer_login_length: "Le nom d'utilisateur doit comprendre entre 3 et 40 caractères"
+        customer_login_unique: "Ce nom d'utilisateur existe déjà"
+        customer_name_length: "Le nom d'un membre ne peut pas comprendre plus de 100 caractères"
+        customer_bad_login_message: "Veuillez utiliser uniquement des lettres, des nombres et .-_@ pour le nom d'utilisateur"
+        customer_bad_name_message: "Veuillez éviter les caractères non imprimables dans le nom"
+        customer_password_presence: "Veuillez fournir un mot de passe"
+        customer_password_length: "Veuillez entrer un mot de passe entre 5 et 40 caractères"
+        model_title_presence: "Vous devez donner un titre à ce modèle"
+        model_title_length: "Le titre doit comprendre entre 3 et 100 caractères"
+        model_title_uniqueness: "Ce titre existe déjà. Veuillez choisir un autre titre."
+        model_price_presence: "Veuillez donner un prix"
+        model_price_numericality: "Le prix doit être un nombre entier valide"
+        model_expiration_presence: "Vous devez donner un nombre de jours après lequel ce modèle deviendra invalide"
+        model_expiration_numericality: "Le nombre de jours d'expiration doit être un nombre entier valide"
+        model_time_presence: "Veuillez indiquer un temps d'expiration (en minutes)"
+        model_time_numericality: "Le temps doit être un nombre entier valide"

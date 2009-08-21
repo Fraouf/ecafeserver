@@ -1,0 +1,7 @@
+<h1><%= t 'config' %></h1>
+<% form_tag (configuration_path, :id => "configuration_new") do %>
+<p><%= label_tag t 'configuration.country' %><br />
+<%= select_tag(:country, options_for_select([['English (United States)', 'en-US'], ['Francais (France)', 'fr-FR']], I18n.locale)) %></p>
+
+<p><%= submit_tag t 'configuration.change' %></p>
+<% end -%>

@@ -1,0 +1,263 @@
+"en-US":
+  config: "Configuration"
+  logout: "Logout"
+  login: "Log in"
+  username: "Username"
+  password: "Password"
+  index: "Home"
+  name: "Full name"
+  password_confirmation: "Confirm password"
+  admin: "Admin"
+  add: "Add"
+  delete: "Delete"
+  edit: "Edit"
+  my_profile: "My profile"
+  title: "Title"
+  never: "Never"
+  unlimited: "Unlimited"
+  timecode: "Timecode"
+  time_left: "Time left"
+  model: "Model"
+  statistics: "Statistics"
+  credits: "Credits"
+  email: "Email"
+  phone: "Phone"
+  question: "Question"
+  answer: "Answer"
+  ip_address: "IP Address"
+  session_id: "Session ID"
+  hostname: "Hostname"
+  state: "State"
+  configuration:
+    changed_successfully: "The configuration was changed successfully. Please reload the page."
+    invalid_locale: "Invalid language provided"
+    change: "Change configuration"
+    country: "Language and country"
+  employees:
+    employees: "Employees"
+    password: "The password"
+    password_confirmation: "The confirm password field"
+    add_failed: "The new employee was not added"
+    edit_failed: "This employee was not modified"
+    edit_profile_failed: "Your profile was not saved successfully"
+    add_new: "Add a new employee"
+    added_succesfully: "The employee was added successfully"
+    deleted_successfully: "The employee was deleted successfully"
+    is_admin: "Check if this employee will be an administrator:"
+    edit_header: "Edit employee"
+    edit_successful: "The employee was successfully modified"
+    edit_profile_header: "Edit my profile"
+    edit_profile: "Change my profile"
+    edit_profile_successful: "Your profile was successfully changed"
+  models:
+    models: "Models"
+    add_new: "Add a new model"
+    price: "Price (in $)"
+    expiration: "Expiration (in days)"
+    time: "Time (in minutes)"
+    add_new: "Add a new model"
+    add_failed: "The new model was not added"
+    added_successfully: "The new model was added successfully"
+    destroyed_successfully: "The model was successfully destroyed"
+    edit: "Edit model"
+    edit_failed: "The model was not modified"
+    edit_successful: "The model was edited successfully"
+  timecodes:
+    timecodes: "Timecodes"
+    expiration_date: "Date of expiration"
+    expires: "Expires"
+    add_new: "Add a new timecode"
+    added_successfully: "The timecode '{{code}}' was saved successfully"
+    add_failed: "An error occured while saving this timecode"
+    destroy_failed: "You can not destroy a timecode that has already been used"
+    destroyed_successfully: "The timecode '{{code}}' was successfully destroyed"
+  customers:
+    customers: "Customers"
+    add_new: "Add a new customer"
+    added_successfully: "The customer was added successfully"
+    add_failed: "Error(s) occured while saving this customer"
+    deleted_successfully: "The customer was deleted successfully"
+  sessions:
+    login_successful: "Successfully logged in"
+    logout: "You have been logged out"
+    login_failed: "Invalid username or password"
+  clients:
+    clients: "Client computers"
+  operations:
+    operations: "Operations"
+    models:
+      create: "MODEL '{{title}}' CREATED"
+      destroy: "MODEL '{{title}}' DESTROYED"
+      update: "MODEL '{{title}}' UPDATED"
+    employees:
+      create: "EMPLOYEE '{{login}}' CREATED"
+      destroy: "EMPLOYEE '{{login}}' DESTROYED"
+      update: "EMPLOYEE '{{login}}' UPDATED"
+      update_profile: "EMPLOYEE '{{login}}' UPDATED HIS PROFILE"
+    timecodes:
+      create: "TIMECODE '{{code}}' CREATED"
+      destroy: "TIMECODE '{{code}}' DESTROYED"
+      destroy_failed: "TIMECODE: AN ATTEMPT TO DELETE '{{code}}' WAS PERFORMED"
+      connection_not_found: "TRYING TO CONNECT WITH TIMECODE: '{{code}}'"
+      connection_invalid: "TRYING TO CONNECT WITH TIMECODE: '{{code}}'"
+      connection: "SUCCESSFUL CONNECTION WITH TIMECODE: '{{code}}'"
+      disconnect: "TIMECODE DISCONNECTION: '{{code}}'"
+    customers:
+      create: "CUSTOMER '{{login}}' CREATED"
+      destroy: "CUSTOMER '{{login}}' DESTROYED"
+      connection_login_invalid: "'{{login}}' TRIED TO CONNECT (INVALID LOGIN)"
+      connection_password_invalid: "'{{login}}' TRIED TO CONNECT (INVALID PASSWORD)"
+      connection_no_time_left: "'{{login}}' TRIED TO CONNECT (NO TIME LEFT)"
+      connection: "'{{login}}' CONNECTED SUCCESSFULLY"
+      disconnect: "CUSTOMER DISCONNECTION: '{{login}}'"
+  number:
+    # Used in number_with_delimiter()
+    # These are also the defaults for 'currency', 'percentage', 'precision', and 'human'
+    format:
+      # Sets the separator between the units, for more precision (e.g. 1.0 / 2.0 == 0.5)
+      separator: "."
+      # Delimets thousands (e.g. 1,000,000 is a million) (always in groups of three)
+      delimiter: ","
+      # Number of decimals, behind the separator (the number 1 with a precision of 2 gives: 1.00)
+      precision: 3
+      
+    # Used in number_to_currency()
+    currency:
+      format:
+        # Where is the currency sign? %u is the currency unit, %n the number (default: $5.00)
+        format: "%u%n"
+        unit: "$"
+        # These three are to override number.format and are optional
+        separator: "."
+        delimiter: ","
+        precision: 2
+        
+    # Used in number_to_percentage()
+    percentage:
+      format:
+        # These three are to override number.format and are optional
+        # separator: 
+        delimiter: ""
+        # precision: 
+        
+    # Used in number_to_precision()
+    precision:
+      format:
+        # These three are to override number.format and are optional
+        # separator:
+        delimiter: ""
+        # precision:
+        
+    # Used in number_to_human_size()
+    human:
+      format:
+        # These three are to override number.format and are optional
+        # separator: 
+        delimiter: ""
+        precision: 1
+      storage_units:
+        # Storage units output formatting.
+        # %u is the storage unit, %n is the number (default: 2 MB)
+        format: "%n %u"
+        units:
+          byte:
+            one:   "Byte"
+            other: "Bytes"
+          kb: "KB"
+          mb: "MB"
+          gb: "GB"
+          tb: "TB"
+
+  # Used in distance_of_time_in_words(), distance_of_time_in_words_to_now(), time_ago_in_words()
+  datetime:
+    distance_in_words:
+      half_a_minute: "half a minute"
+      less_than_x_seconds:
+        one:   "less than 1 second"
+        other: "less than {{count}} seconds"
+      x_seconds:
+        one:   "1 second"
+        other: "{{count}} seconds"
+      less_than_x_minutes:
+        one:   "less than a minute"
+        other: "less than {{count}} minutes"
+      x_minutes:
+        one:   "1 minute"
+        other: "{{count}} minutes"
+      about_x_hours:
+        one:   "about 1 hour"
+        other: "about {{count}} hours"
+      x_days:
+        one:   "1 day"
+        other: "{{count}} days"
+      about_x_months:
+        one:   "about 1 month"
+        other: "about {{count}} months"
+      x_months:
+        one:   "1 month"
+        other: "{{count}} months"
+      about_x_years:
+        one:   "about 1 year"
+        other: "about {{count}} years"
+      over_x_years:
+        one:   "over 1 year"
+        other: "over {{count}} years"
+    prompts:
+      year:   "Year"
+      month:  "Month"
+      day:    "Day"
+      hour:   "Hour"
+      minute: "Minute"
+      second: "Seconds"
+
+  activerecord:
+    errors:
+      template:
+        header:
+          one:    "1 error prohibited this {{model}} from being saved"
+          other:  "{{count}} errors prohibited this {{model}} from being saved"
+        # The variable :count is also available
+        body: "The following errors happened:"
+    messages:
+        inclusion: "is not included in the list"
+        exclusion: "is reserved"
+        invalid: "is invalid"
+        confirmation: "doesn't match confirmation"
+        accepted: "must be accepted"
+        empty: "can't be empty"
+        blank: "can't be blank"
+        too_long: "is too long (maximum is {{count}} characters)"
+        too_short: "is too short (minimum is {{count}} characters)"
+        wrong_length: "is the wrong length (should be {{count}} characters)"
+        taken: "has already been taken"
+        not_a_number: "is not a number"
+        greater_than: "must be greater than {{count}}"
+        greater_than_or_equal_to: "must be greater than or equal to {{count}}"
+        equal_to: "must be equal to {{count}}"
+        less_than: "must be less than {{count}}"
+        less_than_or_equal_to: "must be less than or equal to {{count}}"
+        odd: "must be odd"
+        even: "must be even"
+        employee_login_presence: "You must provide a login"
+        employee_login_length: "The login must be at least 3 characters and at most 40 characters"
+        employee_login_unique: "This login already exists"
+        employee_name_length: "The name of the employee can not exceed 100 characters"
+        employee_bad_login_message: "Please use only letters, numbers and .-_@ for the login"
+        employee_bad_name_message: "Please avoid non-printing characters and \\&gt;&lt;&amp;/ in the name"
+        customer_login_presence: "You must provide a login"
+        customer_login_length: "The login must be at least 3 characters and at most 40 characters"
+        customer_login_unique: "This login already exists"
+        customer_name_length: "The name of the customer can not exceed 100 characters"
+        customer_bad_login_message: "Please use only letters, numbers and .-_@ for the login"
+        customer_bad_name_message: "Please avoid non-printing characters and \\&gt;&lt;&amp;/ in the name"
+        customer_password_presence: "Please provide a password"
+        customer_password_length: "Please provide a password that has between 5 and 40 characters"
+        model_title_presence: "You must give a title to the model"
+        model_title_length: "The length of the title must be between 3 and 100 characters"
+        model_title_uniqueness: "This title already exists. Please choose another title"
+        model_price_presence: "Please provide a price"
+        model_price_numericality: "The price must be a valid integer"
+        model_expiration_presence: "You must set a number of days after which a timecode created using this model will expire"
+        model_expiration_numericality: "The expiration time must be a valid integer"
+        model_time_presence: "Please provide a time of expiration (in minutes)"
+        model_time_numericality: "The time must be a valid integer"

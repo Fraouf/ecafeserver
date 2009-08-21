@@ -1,0 +1,2 @@
+class ClientsApi < ActionWebService::API::Base
+end

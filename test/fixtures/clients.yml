@@ -1,0 +1,30 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+# one:
+#   column: value
+#
+# two:
+#   column: value
+
+  available:
+    ip_address: 192.168.1.2
+    hostname: available
+    port: 65534
+    session_id: dbf8ec26-76f3-11de-9464-00247e13e797
+    state: available
+
+  timecode:
+    ip_address: 192.168.1.3
+    hostname: timecode
+    port: 65534
+    session_id: a3905e42-76f7-11de-9464-00247e13e797
+    state: connected
+    timecode_id: 1
+
+  customer:
+    ip_address: 192.168.1.4
+    hostname: customer
+    port: 65534
+    session_id: a40191f2-76f7-11de-9464-00247e13e797
+    state: connected
+    customer_id: 1

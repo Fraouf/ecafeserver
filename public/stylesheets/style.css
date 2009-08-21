@@ -1,0 +1,115 @@
+body {
+	width: 800px;
+	margin: auto;
+	font-family: trebuchet ms, verdana, arial, tahoma;
+	font-size: 90%;
+	color: #28313A;
+}
+
+table {
+	width: 100%;
+	text-align: center;
+}
+
+th {
+	font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica,
+	sans-serif;
+	color: white;
+	border: 1px solid #4d83b1;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	text-align: left;
+	padding: 6px 6px 6px 12px;
+	background-color: #4d83b1;
+}
+
+th.nobg {
+	border: 0;
+	background: none;
+}
+
+
+td {
+	border: 1px solid #4d83b1;
+	background: #fff;
+	padding: 6px 6px 6px 12px;
+	color: #6D929B;
+}
+
+#header {
+	background-color: #4d83b1;
+}
+
+#header h1 {
+	margin: 0 20px;
+	padding: 0;
+	line-height: 3em;
+	color: white;
+	font-size: 200%;
+}
+
+#topbar {
+	text-align: right;
+	border-bottom: 1px solid #4d83b1;
+	padding: 5px;
+	
+}
+
+.tabs {
+	padding-top: 5px;
+}
+
+#minitabs {
+	margin: 0;
+	padding: 0 0 20px 10px;
+	border-bottom: 1px solid #4d83b1;
+	}
+
+#minitabs li {
+	margin: 0; 
+	padding: 0;
+	display: inline;
+	list-style-type: none;
+	}
+	
+#minitabs a:link, #minitabs a:visited {
+	float: left;
+	font-size: 10px;
+	line-height: 14px;
+	font-weight: bold;
+	margin: 0 10px 4px 10px;
+	padding-bottom: 2px;
+	text-decoration: none;
+	color: #4d83b1;
+	}
+
+#minitabs a.active:link, #minitabs a.active:visited, #minitabs a:hover {
+	border-bottom: 4px solid #4d83b1;
+	padding-bottom: 2px;
+	background: #fff;
+	color: #4d83b1;
+	}
+
+div.notice {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	width: 40%;
+	border: 1px solid #6C6;
+	background-color: #CFC;
+	margin-top: 10px;
+	padding: 5px 8px;
+	font-weight: bold;
+}
+
+div.error, div.errorExplanation {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	width: 100%;
+	border: 1px solid #C66;
+	background-color: #FCC;
+	margin-top: 10px;
+	padding: 5px 8px;
+	font-weight: bold;
+}

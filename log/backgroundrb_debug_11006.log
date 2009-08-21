@@ -1,0 +1,30 @@
+/home/guillaume/Documents/ECafe/Server/src/ecafeserver/lib/workers/timer_worker.rb:9:in `check_client': You have a nil object when you didn't expect it! (NoMethodError)
+The error occurred while evaluating nil.session_id
+	from /home/guillaume/Documents/ECafe/Server/src/ecafeserver/lib/workers/timer_worker.rb:5:in `create'
+	from /var/lib/gems/1.8/gems/packet-0.1.15/bin/../lib/packet/packet_periodic_event.rb:23:in `call'
+	from /var/lib/gems/1.8/gems/packet-0.1.15/bin/../lib/packet/packet_periodic_event.rb:23:in `run'
+	from /var/lib/gems/1.8/gems/packet-0.1.15/bin/../lib/packet/packet_core.rb:301:in `check_for_timer_events'
+	from /var/lib/gems/1.8/gems/packet-0.1.15/bin/../lib/packet/packet_core.rb:301:in `each'
+	from /var/lib/gems/1.8/gems/packet-0.1.15/bin/../lib/packet/packet_core.rb:301:in `check_for_timer_events'
+	from /home/guillaume/Documents/ECafe/Server/src/ecafeserver/vendor/plugins/backgroundrb/server/lib/meta_worker.rb:372:in `check_for_timer_events'
+	from /var/lib/gems/1.8/gems/packet-0.1.15/bin/../lib/packet/packet_core.rb:140:in `start_reactor'
+	from /var/lib/gems/1.8/gems/packet-0.1.15/bin/../lib/packet/packet_core.rb:139:in `loop'
+	from /var/lib/gems/1.8/gems/packet-0.1.15/bin/../lib/packet/packet_core.rb:139:in `start_reactor'
+	from /var/lib/gems/1.8/gems/packet-0.1.15/bin/../lib/packet/packet_worker.rb:20:in `start_worker'
+	from /var/lib/gems/1.8/gems/packet-0.1.15/bin/packet_worker_runner:33:in `load_worker'
+	from /var/lib/gems/1.8/gems/packet-0.1.15/bin/packet_worker_runner:26:in `initialize'
+	from /var/lib/gems/1.8/gems/packet-0.1.15/bin/packet_worker_runner:47:in `new'
+	from /var/lib/gems/1.8/gems/packet-0.1.15/bin/packet_worker_runner:47
+	from /var/lib/gems/1.8/bin/packet_worker_runner:19:in `load'
+	from /var/lib/gems/1.8/bin/packet_worker_runner:19
+Error calling method create with  on worker timer_worker at Sat Jul 25 14:54:38 -0400 2009
+You have a nil object when you didn't expect it!
+The error occurred while evaluating nil.session_id
+Error calling method create with  on worker timer_worker at Sat Jul 25 14:54:56 -0400 2009
+You have a nil object when you didn't expect it!
+The error occurred while evaluating nil.session_id
+Error calling method create with  on worker timer_worker at Sat Jul 25 14:57:06 -0400 2009
+You have a nil object when you didn't expect it!
+The error occurred while evaluating nil.session_id
+/home/guillaume/Documents/ECafe/Server/src/ecafeserver/lib/workers/timer_worker.rb:13: warning: don't put space before argument parentheses
+/home/guillaume/Documents/ECafe/Server/src/ecafeserver/lib/workers/timer_worker.rb:13: warning: don't put space before argument parentheses

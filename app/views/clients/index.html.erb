@@ -1,0 +1,17 @@
+<h1><%= t 'clients.clients'%></h1>
+<table id="clients">
+	<tr>
+                <th><%= t 'ip_address' %></th>
+		<th><%= t 'session_id' %></th>
+		<th><%= t 'hostname' %></th>
+                <th><%= t 'state' %></th>
+	</tr>
+	<% @clients.each do |client| %>
+	<tr>
+		<td><%= client.ip_address %></td>
+		<td><%= client.session_id %></td>
+		<td><%= client.hostname %></td>
+                <td><%= client.state %></td>
+	</tr>
+	<% end %>
+</table>

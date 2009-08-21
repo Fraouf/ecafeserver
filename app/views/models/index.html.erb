@@ -1,0 +1,40 @@
+<h1><%= t 'models.models' %></h1>
+<table id="models">
+	<tr>
+		<th><%= t 'title' %></th>
+		<th><%= t 'models.price' %></th>
+		<th><%= t 'models.expiration' %></th>
+		<th><%= t 'models.time' %></th>
+		<% if current_employee.is_admin %>
+                  <th class="nobg"></th>
+                 <% end %>
+	</tr>
+	<% @models.each do |model| %>
+	<tr>
+		<td><%= model.title %></td>
+		<td><%= model.price %></td>
+		<td><% if model.expiration > 0 %>
+		<%= model.expiration %>
+		<% elsif model.expiration == 0 %>
+		<%= t 'never' %>
+		<% end %></td>
+		<td><% if model.time > 0 %>
+		<%= model.time %>
+		<% elsif model.time == 0 %>
+		<%= t 'unlimited' %>
+		<% end %></td>
+                <% if current_employee.is_admin %>
+		<td><%= link_to I18n.t('edit'), edit_model_path(model) %> - 
+			<% form_tag model_path(model), :method => :delete do %>
+			<%= submit_tag t 'delete' %>
+			<% end %></td>
+                <% end %>
+	</tr>
+	<% end %>
+</table>
+<% if current_employee.is_admin %>
+<br />
+<div style="text-align: right;">
+	<%= link_to I18n.t('models.add_new'), {:controller => "models", :action => "new"} %>
+</div>
+<% end %>

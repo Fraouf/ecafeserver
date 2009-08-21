@@ -1,0 +1,18 @@
+<h1><%= t 'models.edit' %></h1>
+
+<%= error_messages_for :model, :header_message => I18n.t('models.edit_failed') %>
+<% form_for @model do |f| -%>
+<p><%= label_tag 'title', I18n.t('title') %><br />
+<%= f.text_field :title %></p>
+
+<p><%= label_tag 'price', I18n.t('models.price') %><br />
+<%= f.text_field 'price' %></p>
+
+<p><%= label_tag 'expiration', I18n.t('models.expiration') %><br />
+<%= f.text_field 'expiration' %></p>
+
+<p><%= label_tag 'time', I18n.t('models.time') %><br />
+<%= f.text_field 'time' %></p>
+
+<p><%= submit_tag t 'edit' %></p>
+<% end -%>
