@@ -1,10 +1,17 @@
 class Timecode < ActiveRecord::Base
-  has_one :credit
+  has_one :sale
   belongs_to :customer
   has_one :client, :dependent => :destroy
+
+  def self.per_page
+    10
+  end
   
 	def generate_code
-		self.code = Digest::SHA1.hexdigest("--#{Time.now.to_s}--")[0,8]
+    # generate a random number between 0 and 9, to make sure the timecode starts with a number
+    initial_num = rand(9)
+    co = Digest::SHA1.hexdigest("--#{Time.now.to_s}--")[0,7]
+		self.code = initial_num.to_s() + co
 		# check that the generated code does not exist already !!!
 	end
 	

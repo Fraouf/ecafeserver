@@ -1,0 +1,22 @@
+<% if(@date_from.nil?)
+    @date_from = { :day => Time.now.day - 1}
+  end %>
+<h1><%= t 'sales' %></h1>
+<% form_tag({ :controller => 'sales', :action => 'index' }, {:method => 'get'}) do %>
+<p><%= t 'date.from' %>: <%= date_select("range", "from", :default => @date_from) %> <%= t 'date.to' %>: <%= date_select("range", "to", :default => @date_to) %> </p>
+<p><%= submit_tag t 'search' %></p>
+<% end %>
+<table>
+  <tr>
+    <th><%= t 'timecode' %></th>
+    <th><%= t 'amount' %></th>
+    <th><%= t 'date_string' %></th>
+  </tr>
+  <% @sales.each do |sale| %>
+  <tr>
+    <td><% if !sale.timecode.nil? %> <%= sale.timecode.code %><% end %> </td>
+    <td><%= sale.amount %></td>
+    <td><%= I18n.l(sale.created_at) %></td>
+  </tr>
+  <% end %>
+</table>

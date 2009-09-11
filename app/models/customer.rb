@@ -7,22 +7,33 @@ class Customer < ActiveRecord::Base
   validates_presence_of     :login,    :message => :customer_login_presence
   validates_length_of       :login,    :within => 3..40, :message => :customer_login_length
   validates_uniqueness_of   :login,    :message => :customer_login_unique
-  validates_format_of       :login,    :with => Authentication.login_regex, :message => :customer_bad_login_message
+  validates_format_of       :login,    :with => /\A[A-Za-z][\w\.\-_@]+\z/, :message => :customer_bad_login_message
 
   validates_format_of       :name,     :with => Authentication.name_regex,  :message => :customer_bad_name_message, :allow_nil => true
   validates_length_of       :name,     :maximum => 100, :message => :customer_name_length
 
   attr_accessor :password
-  validates_presence_of     :password, :message => :customer_password_presence
-  validates_length_of       :password, :within => 5..40, :message => :customer_password_length
+  validates_presence_of     :password, :message => :customer_password_presence, :on => :create
+  validates_length_of       :password, :within => 5..40, :message => :customer_password_length, :on => :create
   before_save :encrypt_password
-
 
   HUMAN_ATTRIBUTES = {
     :login	=>	"",
     :name	=>	"",
     :password	=>	""
   }
+
+  def self.per_page
+    10
+  end
+
+  def validate_on_update
+    unless self.password.blank?
+      if self.password.length < 4 || self.password.length > 40
+        errors.add_to_base(:customer_password_length)
+      end
+    end
+  end
 
   def time
     @time = get_time()

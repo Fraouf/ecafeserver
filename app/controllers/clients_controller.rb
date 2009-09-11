@@ -5,11 +5,6 @@ class ClientsController < ApplicationController
   wsdl_service_name 'Clients'
   web_service_api ClientsApi
   web_service_scaffold :invocation if Rails.env == 'development'
-
-  def index
-    @clients = Client.all()
-    render :layout => "application"
-  end
   
   def register(port, hostname)
     ip_address = determine_ip(request)
@@ -92,25 +87,25 @@ class ClientsController < ApplicationController
         raise XMLRPC::FaultException.new(-10, "Already connected")
       else
         @customer = Customer.find_by_login(login)
+        operation_type = "operations.utilization"
+        operation_controller = "operations.customer"
+        operation_action = "operations.connection"
         if @customer.nil?
           raise XMLRPC::FaultException.new(-4, "Login not found")
-          Operation.add(I18n.t('operations.customers.connection_login_invalid', :login => login))
+          Operation.add(operation_type, operation_controller, operation_action, "operations.customers.connection_login_invalid, " + login);
         else
           if !@customer.valid_password?(password)
             raise XMLRPC::FaultException.new(-5, "Password invalid")
-            Operation.add(I18n.t('operations.customers.connection_password_invalid', :login => login))
+            Operation.add(operation_type, operation_controller, operation_action, "operations.customers.connection_password_invalid, " + login)
           else
             if @customer.time == 0
               raise XMLRPC::FaultException.new(-6, "No time left")
-              Operation.add(I18n.t('operations.customers.connection_no_time_left', :login => login))
+              Operation.add(operation_type, operation_controller, operation_action, "operations.customers.connection_no_time_left, " + login)
             else
               @client.connect!
               @customer.update_attribute("last_login_at", Time.now)
               @client.update_attributes(:customer_id => @customer.id, :last_request => Time.now)
-              Operation.add(I18n.t('operations.customers.connection', :login => login))
-              if @customer.time != -1
-                # TODO: Start timer
-              end
+              Operation.add(operation_type, operation_controller, operation_action, login)
               return true
             end
           end
@@ -128,29 +123,25 @@ class ClientsController < ApplicationController
         raise XMLRPC::FaultException.new(-10, "Already connected")
       else
         @timecode = Timecode.find_by_code(code)
+        operation_type = "operations.utilization"
+        operation_controller = "operations.timecode"
+        operation_action = "operations.connection"
         if @timecode.nil?
           raise XMLRPC::FaultException.new(-7, "Timecode not found")
-          Operation.add(I18n.t('operations.timecodes.connection_not_found', :code => code))
+          Operation.add(operation_type, operation_controller, operation_action, "operations.timecodes.connection_not_found, " +  code)
         else
           if !@timecode.is_valid?
             raise XMLRPC::FaultException.new(-8, "Timecode is invalid")
-            Operation.add(I18n.t('operations.timecodes.connection_invalid', :code => @timecode.code))
+            Operation.add(operation_type, operation_controller, operation_action, "operations.timecodes.connection_invalid, " + @timecode.code)
             @timecode.destroy
           else
             if !@timecode.customer.nil?
               raise XMLRPC::FaultException.new(-9, "Timecode is associated with a customer. Please login using your customer's account")
-              Operation.add(I18n.t('operations.timecodes.connection_invalid', :code => @timecode.code))
+              Operation.add(operation_type, operation_controller, operation_action, "operations.timecodes.connection_invalid, " + @timecode.code)
             else
               @client.connect!
               @client.update_attributes(:timecode_id => @timecode.id, :last_request => Time.now)
-              Operation.add(I18n.t('operations.timecodes.connection', :code => @timecode.code))
-              if !@timecode.unlimited
-                #MiddleMan.new_worker(:worker => :timer_worker, :worker_key => @client.session_id)
-                #MiddleMan.new_worker(:worker => :timer_worker)
-                #key = MiddleMan.new_worker(:worker => :timer_worker)
-                #worker = MiddleMan.worker(:timer_worker, key)
-                #worker.async_check_client
-              end
+              Operation.add(operation_type, operation_controller, operation_action, @timecode.code)
               return true
             end
           end
@@ -164,11 +155,12 @@ class ClientsController < ApplicationController
     if @client.nil?
       raise XMLRPC::FaultException.new(-3, "Client not found")
     else
-      # TODO: Destroy timer
+      operation_type = "operations.utilization"
+      operation_action = "operations.disconnect"
       if @client.type() == "timecode"
-        Operation.add(I18n.t('operations.timecodes.disconnect', :code => @client.timecode.code))
+        Operation.add(operation_type, "operations.timecode", operation_action, @client.timecode.code)
       elsif @client.type() == "customer"
-        Operation.add(I18n.t('operations.customers.disconnect', :login => @client.customer.login))
+        Operation.add(operation_type, "operations.customer", operation_action, @client.customer.login)
       end
       if @client.state == "connected"
         @client.disconnect!

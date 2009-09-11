@@ -1,0 +1,25 @@
+<h1><%= t 'statistics' %></h1>
+<% form_tag({ :controller => 'statistics', :action => 'index' }, {:method => 'get'}) do %>
+<p><%= date_select("range", "from", :default => @date) %></p>
+<p><%= submit_tag t 'search' %></p>
+<% end %>
+<table>
+  <tr>
+    <th><%= I18n.l(@date) %></th>
+  </tr>
+  <tr>
+    <td><%= t 'statistic.day_amount' %></td>
+    <td><%= @day_amount %></td>
+  <tr>
+    <td><%= t 'statistic.day_timecodes' %></td>
+    <td><%= @day_timecodes %></td>
+  </tr>
+  <tr>
+    <td><%= t 'statistic.day_customers' %></td>
+    <td><%= @day_customers %></td>
+  </tr>
+</table>
+<%= link_to t('sales'), {:controller => "sales", :action => "index"} %><br />
+<% if is_admin? %>
+<%= link_to t('operations.operations'), {:controller => "operations", :action => "index"} %>
+<% end %>

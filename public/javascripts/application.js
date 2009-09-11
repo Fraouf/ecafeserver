@@ -1,49 +1,41 @@
-function ECafe(){ }
+function model_expiration_time () {
+    if($("model_expiration") && $("never")) {
+        if($("model_expiration").value == "0") {
+            $("never").checked = true;
+            $("model_expiration").disabled = true;
+        }
+        $("never").observe("click", function() {
+            if($("never").checked) {
+                $("model_expiration").value = 0;
+                $("model_expiration").disabled = true;
+            } else {
+                $("model_expiration").disabled = false;
+            }
+        });
+    }
+    
+    if($("model_time") && $("unlimited")) {
+        if($("model_time").value == "0") {
+            $("unlimited").checked = true;
+            $("model_time").disabled = true;
+        }
+        $("unlimited").observe("click", function() {
+            if($("unlimited").checked) {
+                $("model_time").value = 0;
+                $("model_time").disabled = true;
+            } else {
+                $("model_time").disabled = false;
+            }
+        })
+    }
 
-ECafe.configurations = function() {
-	
-	return {
-		"render_new": function() {
-			$('#configuration_new').ajaxForm({
-				dataType: 'json',
-				success: function(data) {
-					if(data.success == true) {
-						jInfo(data.msg, 'Success');
-					}
-					else {
-						jAlert(data.msg, 'Failure');
-					}
-				}
-			});
-		}
-	}
-}();
+    if($("model")) {
+        $("model").observe("submit", function() {
+            $("model_time").disabled = false;
+            $("model_expiration").disabled = false;
+            
+        })
+    }
+}
 
-/*ECafe.employees = function() {
-	
-	return {
-		"render_index": function() {
-			jQuery("#employees").jqGrid({
-				url: '/employees.json',
-				datatype: 'json',
-				colNames:['ID', 'Login', 'Password', 'Name', 'Admin'],
-				colModel:[
-					{name:'id', index:'id'},
-					{name:'login',index:'login', editable: true},
-					{name:'password', index:'password'},
-					{name:'name',index:'name', editable: true},
-					{name:'is_admin',index:'is_admin', formatter:'checkbox', editable: true, edittype: "checkbox"}
-				],
-				width: 800,
-				rowNum:10,
-				rowList:[10,20,30],
-				pager: jQuery('#pager'),
-				sortname: 'login',
-				viewrecords: true,
-				sortorder: "desc",
-				caption:"Employees",
-				editurl:"someurl.php"
-			}).navGrid("#pager", {search:false});
-		}
-	 }
-}();*/
+Event.observe(window, 'load', model_expiration_time);

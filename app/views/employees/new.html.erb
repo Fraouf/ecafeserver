@@ -15,8 +15,8 @@
 <p><%= label_tag 'password_confirmation', I18n.t('password_confirmation') %><br/>
 <%= f.password_field :password_confirmation %></p>
 
-<p><%= label_tag 'is_admin', I18n.t('employees.is_admin') %><br />
-<%= f.check_box :is_admin %></p>
+<p><%= f.check_box :is_admin %>
+<%= label_tag 'is_admin', I18n.t('employees.is_admin') %></p>
 
 <p><%= submit_tag t 'add' %></p>
 <% end -%>

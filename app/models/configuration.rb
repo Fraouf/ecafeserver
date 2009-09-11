@@ -16,7 +16,7 @@ class Configuration
 		
 	protected
 	def configuration_file
-		return "config/configuration"
+		return RAILS_ROOT+"/config/configuration"
 	end
 	
 	def get

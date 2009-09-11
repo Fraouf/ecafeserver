@@ -9,22 +9,15 @@ class ConfigurationsController < ApplicationController
 		@config = Configuration.instance
 		response = @config.save(params)
 		logger.debug "Config: #{params.inspect}"
-		msg = ""
-		success = true
 		if response == true
 			I18n.locale = @config.locale
-			msg = t 'configuration.changed_successfully'
+      flash[:notice] = t 'configuration.changed_successfully'
 		else
 			case response
 				when 'invalid_locale'
-					msg = t 'configuration.invalid_locale'
-					success = false
+					flash[:error] = t 'configuration.invalid_locale'
 			end
 		end
-		respond_to do |format|
-			format.json {
-				render :json => {:success => success, :msg => msg}
-			}
-		end
+    redirect_to :controller => "configurations", :action => "new"
 	end
 end

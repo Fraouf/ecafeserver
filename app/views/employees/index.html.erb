@@ -1,7 +1,6 @@
 <h1><%= t 'employees.employees'%></h1>
 <table id="employees">
 	<tr>
-		<th>Id</th>
 		<th><%= t 'username' %></th>
 		<th><%= t 'name' %></th>
 		<th><%= t 'admin' %></th>
@@ -9,7 +8,6 @@
 	</tr>
 	<% @employees.each do |employee| %>
 	<tr>
-		<td><%= employee.id %></td>
 		<td><%= employee.login %></td>
 		<td><%= employee.name %></td>
 		<td><input type="checkbox" <% if employee.is_admin %>checked<% end %> disabled="true" /></td>

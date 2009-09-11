@@ -1,1 +1,21 @@
-
+<h1><%= t 'index' %></h1>
+<% if(@clients.size == 0) %>
+<p><%= t 'clients.no_clients_connected' %></p>
+<% else %>
+<table>
+  <tr>
+    <th><%= t 'hostname' %></th>
+    <th><%= t 'state' %></th>
+    <th><%= t 'timecode' %></th>
+    <th><%= t 'customer' %></th>
+  </tr>
+  <% @clients.each do |client| %>
+  <tr>
+          <td><%= client.hostname %></td>
+          <td><%= client.state %></td>
+          <td><% if(!client.timecode.nil?) %><%= client.timecode.code %><% end %></td>
+          <td><% if(!client.customer.nil?) %><%= client.customer.login %><% end %></td>
+  </tr>
+  <% end %>
+</table>
+<% end %>

@@ -4,12 +4,14 @@ ActionController::Routing::Routes.draw do |map|
   #map.register '/register', :controller => 'employees', :action => 'create'
   #map.signup '/signup', :controller => 'employees', :action => 'new'
   map.resources :employees, :collection => { :edit_profile => :get, :update_profile => :post }
-  map.resources :models, :timecodes, :credits, :operations, :customers, :clients
+  map.resources :models, :timecodes, :sales, :operations, :customers, :clients
   map.resource :session, :configuration
 
   map.connects '/clients/:action', :controller => 'clients'
+  map.connects '/customers/:action/:id', :controller => 'customers'
   
   map.connect '/pages/:action.:format', :controller => 'pages'
+  map.connect '/statistics/:action.:format', :controller => 'statistics'
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:

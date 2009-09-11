@@ -3,24 +3,8 @@
 <head>
 	<title>ECafe Server</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<%= stylesheet_link_tag "jquery.alerts/jquery.alerts", "style" %>
-	
-	<%= javascript_include_tag "jquery-1.3.2", "jquery.form", "jquery.alerts" %>
-	
-	<%= javascript_include_tag "application" %>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			<% ecafe_action = "ECafe."+controller.controller_name+'.render_'+controller.action_name
-					ecafe_controller = "ECafe."+controller.controller_name%>
-				if(<%= ecafe_controller %>) {
-					if(<%= ecafe_action %>) {
-						<%= ecafe_action %>();
-					}
-				}
-			//ECafe.configurations.render_new();
-			//ECafe.employees.render_index();
-		});
-	</script>
+        <%= stylesheet_link_tag "style" %>
+        <%= javascript_include_tag "prototype", "application" %>
 </head>
 
 <body>
@@ -37,11 +21,11 @@
 	<ul id="minitabs">
 		<li><%= link_to t('index'), {:controller => "pages", :action => "index"} %></li>
 		<li><%= link_to t('timecodes.timecodes'), {:controller => "timecodes", :action => "index"} %></li>
-                <li><%= link_to t('models.models'), {:controller => "models", :action => "index"} %></li>
                 <li><%= link_to t('customers.customers'), {:controller => "customers", :action => "index"} %></li>
+                <li><%= link_to t('models.models'), {:controller => "models", :action => "index"} %></li>
+                <li><%= link_to t('statistics'), {:controller => "statistics", :action => "index"}  %></li>
 		<% if is_admin? %>
 			<li><%= link_to t('employees.employees'), {:controller => "employees", :action => "index"} %></li>
-                        <li><%= link_to t('statistics'), {:controller => "pages", :action => "statistics"}  %></li>
 			<li><%= link_to t('config'), {:controller => "configurations", :action => "new"} %></li>
 		<% end %>
 	</ul>

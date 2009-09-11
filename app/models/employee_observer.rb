@@ -1,10 +1,10 @@
 class EmployeeObserver < ActiveRecord::Observer
   def after_create(employee)
-    Operation.add(I18n.t('operations.employees.create', :login => employee.login))
+    Operation.add("operations.administration", "operations.employee", "operations.create", employee.login)
   end
 
   def after_destroy(employee)
-    Operation.add(I18n.t('operations.employees.destroy', :login => employee.login))
+    Operation.add("operations.administration", "operations.employee", "operations.destroy", employee.login)
   end
 
   # TODO: fix a bug that displays that the employee updated his profile at each login

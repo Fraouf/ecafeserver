@@ -1,4 +1,10 @@
 <h1><%= t 'timecodes.timecodes'%></h1>
+<p>
+  <% form_tag({ :controller => 'timecodes', :action => 'index' }, {:method => 'get'}) do %>
+    <%= text_field_tag :q %>
+    <%= submit_tag t 'search' %>
+  <% end %>
+</p>
 <table id="timecodes">
 	<tr>
 		<th><%= t 'timecode' %></th>
@@ -15,7 +21,7 @@
 		<%= timecode.time %>
 		<% end %></td>
 		<td><% if timecode.expires %>
-		<%= timecode.expiration %>
+		<%= I18n.l(timecode.expiration, :format => :default) %>
 		<% else %>
 		<%= t 'never' %>
 		<% end %></td>
@@ -31,3 +37,4 @@
 <div style="text-align: right;">
 	<%= link_to I18n.t('timecodes.add_new'), :controller => "timecodes", :action => "new" %>
 </div>
+<%= will_paginate @timecodes, :previous_label => I18n.t('previous'), :next_label => I18n.t('next') %>

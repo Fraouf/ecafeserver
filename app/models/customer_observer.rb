@@ -1,10 +1,10 @@
 class CustomerObserver < ActiveRecord::Observer
   #TODO: implement a credit operation ??
   def after_create(customer)
-    Operation.add(I18n.t('operations.customers.create', :login => customer.login))
+    Operation.add("operations.administration", "operations.customer", "operations.create", customer.login)
   end
 
    def after_destroy(customer)
-    Operation.add(I18n.t('operations.customers.destroy', :login => customer.login))
+    Operation.add("operations.administration", "operations.customer", "operations.destroy", customer.login)
   end
 end

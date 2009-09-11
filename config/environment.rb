@@ -24,6 +24,7 @@ Rails::Initializer.run do |config|
   config.gem "chronic"
   config.gem "packet"
   config.gem 'datanoise-actionwebservice', :lib => 'actionwebservice'
+  config.gem 'mislav-will_paginate', :version => '~> 2.3.11', :lib => 'will_paginate', :source => 'http://gems.github.com'
 
 
   # Only load the plugins named here, in the order given (default is alphabetical).

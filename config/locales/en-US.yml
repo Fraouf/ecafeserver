@@ -19,7 +19,7 @@
   time_left: "Time left"
   model: "Model"
   statistics: "Statistics"
-  credits: "Credits"
+  sales: "Sales"
   email: "Email"
   phone: "Phone"
   question: "Question"
@@ -28,8 +28,17 @@
   session_id: "Session ID"
   hostname: "Hostname"
   state: "State"
+  show: "Show"
+  search: "Search"
+  previous: "&laquo; Previous"
+  next: "Next &raquo;"
+  type: "Type"
+  action: "Action"
+  date_string: "Date"
+  amount: "Amount (in $)"
+  customer: "Customer"
   configuration:
-    changed_successfully: "The configuration was changed successfully. Please reload the page."
+    changed_successfully: "The configuration was changed successfully."
     invalid_locale: "Invalid language provided"
     change: "Change configuration"
     country: "Language and country"
@@ -43,7 +52,7 @@
     add_new: "Add a new employee"
     added_succesfully: "The employee was added successfully"
     deleted_successfully: "The employee was deleted successfully"
-    is_admin: "Check if this employee will be an administrator:"
+    is_admin: "Check if this employee is an administrator"
     edit_header: "Edit employee"
     edit_successful: "The employee was successfully modified"
     edit_profile_header: "Edit my profile"
@@ -62,6 +71,8 @@
     edit: "Edit model"
     edit_failed: "The model was not modified"
     edit_successful: "The model was edited successfully"
+    never_expires: "Check this if you want this model to never expire"
+    unlimited: "Check this if you want this model to have unlimited time"
   timecodes:
     timecodes: "Timecodes"
     expiration_date: "Date of expiration"
@@ -77,39 +88,46 @@
     added_successfully: "The customer was added successfully"
     add_failed: "Error(s) occured while saving this customer"
     deleted_successfully: "The customer was deleted successfully"
+    edit: "Edit customer's profile"
+    edit_failed: "Error(s) occured while saving this customer"
+    edit_successful: "The customer was saved successfully"
+    new_credit_title: "Add credit to {{login}} customer account"
+    new_credit: "Recharge"
   sessions:
     login_successful: "Successfully logged in"
     logout: "You have been logged out"
     login_failed: "Invalid username or password"
   clients:
     clients: "Client computers"
+    no_clients_connected: "No client computers connected"
   operations:
     operations: "Operations"
-    models:
-      create: "MODEL '{{title}}' CREATED"
-      destroy: "MODEL '{{title}}' DESTROYED"
-      update: "MODEL '{{title}}' UPDATED"
-    employees:
-      create: "EMPLOYEE '{{login}}' CREATED"
-      destroy: "EMPLOYEE '{{login}}' DESTROYED"
-      update: "EMPLOYEE '{{login}}' UPDATED"
-      update_profile: "EMPLOYEE '{{login}}' UPDATED HIS PROFILE"
+    controller: "Controller"
+    arguments: "Arguments"
+    administration: "ADMINISTRATION"
+    sale: "SALE"
+    utilization: "UTILIZATION"
+    model: "MODEL"
+    create: "CREATION"
+    destroy: "DESTRUCTION"
+    update: "UPDATE"
+    customer: "CUSTOMER"
+    timecode: "TIMECODE"
+    connection: "CONNECTION"
+    disconnect: "DISCONNECTION"
+    all: "ALL"
     timecodes:
-      create: "TIMECODE '{{code}}' CREATED"
-      destroy: "TIMECODE '{{code}}' DESTROYED"
-      destroy_failed: "TIMECODE: AN ATTEMPT TO DELETE '{{code}}' WAS PERFORMED"
-      connection_not_found: "TRYING TO CONNECT WITH TIMECODE: '{{code}}'"
-      connection_invalid: "TRYING TO CONNECT WITH TIMECODE: '{{code}}'"
-      connection: "SUCCESSFUL CONNECTION WITH TIMECODE: '{{code}}'"
-      disconnect: "TIMECODE DISCONNECTION: '{{code}}'"
+      destroy_failed: "DESTRUCTION FORBIDDEN"
+      connection_not_found: "TIMECODE NOT FOUND"
+      connection_invalid: "TIMECODE INVALID"
     customers:
-      create: "CUSTOMER '{{login}}' CREATED"
-      destroy: "CUSTOMER '{{login}}' DESTROYED"
-      connection_login_invalid: "'{{login}}' TRIED TO CONNECT (INVALID LOGIN)"
-      connection_password_invalid: "'{{login}}' TRIED TO CONNECT (INVALID PASSWORD)"
-      connection_no_time_left: "'{{login}}' TRIED TO CONNECT (NO TIME LEFT)"
-      connection: "'{{login}}' CONNECTED SUCCESSFULLY"
-      disconnect: "CUSTOMER DISCONNECTION: '{{login}}'"
+      connection_login_invalid: "USERNAME INVALID"
+      connection_password_invalid: "PASSWORD INVALID"
+      connection_no_time_left: "NO TIME LEFT"
+  statistics:
+    day_amount: "Total sales of the day"
+    day_timecodes: "Nombre of timecodes sold"
+    day_customers: "Number of customers created"
   number:
     # Used in number_with_delimiter()
     # These are also the defaults for 'currency', 'percentage', 'precision', and 'human'
@@ -210,6 +228,34 @@
       minute: "Minute"
       second: "Seconds"
 
+  date:
+    formats:
+      # Use the strftime parameters for formats.
+      # When no format has been given, it uses default.
+      # You can provide other formats here if you like!
+      default: "%Y-%m-%d"
+      short: "%b %d"
+      long: "%B %d, %Y"
+
+    day_names: [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
+    abbr_day_names: [Sun, Mon, Tue, Wed, Thu, Fri, Sat]
+
+    # Don't forget the nil at the beginning; there's no such thing as a 0th month
+    month_names: [~, January, February, March, April, May, June, July, August, September, October, November, December]
+    abbr_month_names: [~, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
+    # Used in date_select and datime_select.
+    order: [ :year, :month, :day ]
+    from: "From"
+    to: "To"
+
+  time:
+    formats:
+      default: "%b %d, %Y %H:%M"
+      short: "%d %b %H:%M"
+      long: "%B %d, %Y %H:%M"
+    am: "am"
+    pm: "pm"
+
   activerecord:
     errors:
       template:
@@ -248,7 +294,7 @@
         customer_login_length: "The login must be at least 3 characters and at most 40 characters"
         customer_login_unique: "This login already exists"
         customer_name_length: "The name of the customer can not exceed 100 characters"
-        customer_bad_login_message: "Please use only letters, numbers and .-_@ for the login"
+        customer_bad_login_message: "Please use only letters, numbers and .-_@ for the login and do not use a number as the first character of the login"
         customer_bad_name_message: "Please avoid non-printing characters and \\&gt;&lt;&amp;/ in the name"
         customer_password_presence: "Please provide a password"
         customer_password_length: "Please provide a password that has between 5 and 40 characters"

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090725175919) do
+ActiveRecord::Schema.define(:version => 20090904160538) do
 
   create_table "bdrb_job_queues", :force => true do |t|
     t.text     "args"
@@ -47,13 +47,6 @@ ActiveRecord::Schema.define(:version => 20090725175919) do
   add_index "clients", ["ip_address"], :name => "index_clients_on_ip_address", :unique => true
 
   create_table "configurations", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "credits", :force => true do |t|
-    t.integer  "amount"
-    t.integer  "timecode_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -99,7 +92,17 @@ ActiveRecord::Schema.define(:version => 20090725175919) do
 
   create_table "operations", :force => true do |t|
     t.string   "user"
-    t.string   "title"
+    t.string   "operation_type"
+    t.string   "controller"
+    t.string   "action"
+    t.string   "arguments"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sales", :force => true do |t|
+    t.integer  "amount"
+    t.integer  "timecode_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

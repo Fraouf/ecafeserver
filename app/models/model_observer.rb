@@ -1,13 +1,13 @@
 class ModelObserver < ActiveRecord::Observer
   def after_create(model)
-    Operation.add(I18n.t('operations.models.create', :title => model.title))
+    Operation.add("operations.administration", "operations.model", "operations.create", model.title)
   end
 
   def after_destroy(model)
-    Operation.add(I18n.t('operations.models.destroy', :title => model.title))
+    Operation.add("operations.administration", "operations.model", "operations.destroy", model.title)
   end
 
   def after_update(model)
-    Operation.add(I18n.t('operations.models.update', :title => model.title))
+    Operation.add("operations.administration", "operations.model", "operations.update", model.title)
   end
 end

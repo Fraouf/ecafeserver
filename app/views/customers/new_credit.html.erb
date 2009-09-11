@@ -1,0 +1,10 @@
+<h1><%= I18n.t('customers.new_credit_title', :login => @customer.login) %></h1>
+
+<% pth = customers_path + '/create_credit/' + params[:id] %>
+<% form_tag pth do |f| -%>
+<p><%= label_tag 'model', I18n.t('model') %><br/>
+<%= collection_select (:model, :id, @models, :id, :title) %></p>
+
+
+<p><%= submit_tag t 'add' %></p>
+<% end -%>

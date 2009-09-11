@@ -1,8 +1,14 @@
 <h1><%= t 'customers.customers'%></h1>
+<p>
+  <% form_tag({ :controller => 'customers', :action => 'index' }, {:method => 'get'}) do %>
+    <%= text_field_tag :q %>
+    <%= submit_tag t 'search' %>
+  <% end %>
+</p>
 <table id="customers">
 	<tr>
-                <th><%= t 'name' %></th>
-		<th><%= t 'username' %></th>
+                <th><%= t 'username' %></th>
+		<th><%= t 'name' %></th>
 		<th><%= t 'email' %></th>
 		<th class="nobg"></th>
 	</tr>
@@ -11,10 +17,7 @@
 		<td><%= customer.login %></td>
 		<td><%= customer.name %></td>
 		<td><%= customer.email %></td>
-		<td><%= link_to I18n.t('edit'), edit_customer_path(customer) %> -
-			<% form_tag customer_path(customer), :method => :delete do %>
-			<%= submit_tag t 'delete' %>
-			<% end %></td>
+		<td><%= link_to I18n.t('show'), customer_path(customer) %></td>
 	</tr>
 	<% end %>
 </table>
@@ -22,3 +25,4 @@
 <div style="text-align: right;">
 	<%= link_to I18n.t('customers.add_new'), :controller => "customers", :action => "new" %>
 </div>
+<%= will_paginate @customers, :previous_label => I18n.t('previous'), :next_label => I18n.t('next') %>
