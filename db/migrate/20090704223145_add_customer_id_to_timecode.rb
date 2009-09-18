@@ -1,6 +1,6 @@
 class AddCustomerIdToTimecode < ActiveRecord::Migration
   def self.up
-    add_column :timecodes, :customer_id, :integer
+    add_column :timecodes, :customer_id, :string
   end
 
   def self.down

@@ -5,6 +5,8 @@
   username: "Username"
   password: "Password"
   index: "Home"
+  firstname: "First name"
+  lastname: "Last name"
   name: "Full name"
   password_confirmation: "Confirm password"
   admin: "Admin"

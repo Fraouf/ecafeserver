@@ -1,4 +1,4 @@
-<h1><%= I18n.t('customers.new_credit_title', :login => @customer.login) %></h1>
+<h1><%= I18n.t('customers.new_credit_title', :login => @customer.uid) %></h1>
 
 <% pth = customers_path + '/create_credit/' + params[:id] %>
 <% form_tag pth do |f| -%>

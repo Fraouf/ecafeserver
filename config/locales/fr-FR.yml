@@ -6,6 +6,8 @@
   username: "Nom d'utilisateur"
   password: "Mot de passe"
   index: "Accueil"
+  firstname: "Prénom"
+  lastname: "Nom"
   name: "Nom complet"
   password_confirmation: "Confirmer le mot de passe"
   admin: "Admin"

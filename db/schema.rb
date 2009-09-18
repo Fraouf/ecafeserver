@@ -52,20 +52,11 @@ ActiveRecord::Schema.define(:version => 20090904160538) do
   end
 
   create_table "customers", :force => true do |t|
-    t.string   "name",             :limit => 100, :default => ""
-    t.string   "login",            :limit => 40
-    t.string   "crypted_password", :limit => 40
-    t.string   "salt",             :limit => 40
-    t.string   "email",            :limit => 100
-    t.string   "phone",            :limit => 100
-    t.text     "question"
-    t.text     "answer"
+    t.string   "uid",           :limit => 40
     t.datetime "last_login_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "customers", ["login"], :name => "index_customers_on_login", :unique => true
 
   create_table "employees", :force => true do |t|
     t.string   "login",                     :limit => 40
@@ -116,7 +107,7 @@ ActiveRecord::Schema.define(:version => 20090904160538) do
     t.string   "code"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "customer_id"
+    t.string   "customer_id"
   end
 
 end

@@ -1,22 +1,16 @@
-<h1><%= @customer.login %></h1>
+<h1><%= @ldap_customer.uid %></h1>
 
 <p><span style="font-weight: bold;"><%= I18n.t('username') %></span><br />
-<%= @customer.login %></p>
+<%= @ldap_customer.uid %></p>
 
 <p><span style="font-weight: bold;"><%= I18n.t('name') %></span><br />
-<%= @customer.name%></p>
+<%= @ldap_customer.cn%></p>
 
 <p><span style="font-weight: bold;"><%= I18n.t('email') %></span><br />
-<%= @customer.email %></p>
+<%= @ldap_customer.mail %></p>
 
 <p><span style="font-weight: bold;"><%=  I18n.t('phone') %></span><br />
-<%= @customer.phone %></p>
-
-<p><span style="font-weight: bold;"><%= I18n.t('question') %></span><br />
-<%= @customer.question %></p>
-
-<p><span style="font-weight: bold;"><%= I18n.t('answer') %></span><br />
-<%= @customer.answer %></p>
+<%= @ldap_customer.homePhone %></p>
 
 <p><span style="font-weight: bold;"><%= I18n.t('timecodes.timecodes') %></span></p>
 <table id="timecodes">

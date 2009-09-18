@@ -14,9 +14,9 @@
 	</tr>
 	<% @customers.each do |customer| %>
 	<tr>
-		<td><%= customer.login %></td>
-		<td><%= customer.name %></td>
-		<td><%= customer.email %></td>
+		<td><%= customer.uid %></td>
+		<td><%= customer.cn %></td>
+		<td><%= customer.mail %></td>
 		<td><%= link_to I18n.t('show'), customer_path(customer) %></td>
 	</tr>
 	<% end %>
@@ -25,4 +25,4 @@
 <div style="text-align: right;">
 	<%= link_to I18n.t('customers.add_new'), :controller => "customers", :action => "new" %>
 </div>
-<%= will_paginate @customers, :previous_label => I18n.t('previous'), :next_label => I18n.t('next') %>
+<% # will_paginate @customers, :previous_label => I18n.t('previous'), :next_label => I18n.t('next') %>

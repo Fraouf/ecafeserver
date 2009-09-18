@@ -1,27 +1,24 @@
 <h1><%= t 'customers.edit' %></h1>
 
 <%= error_messages_for :customer, :header_message => I18n.t('customers.edit_failed') %>
-<% form_for @customer do |f| -%>
-<p><%= label_tag 'login', I18n.t('username') %><br/>
-<%= f.text_field :login, {:disabled => true} %></p>
+<% form_for :customer, @customer, :url => { :action => "update" }, :html => { :method => :put } do |f| -%>
+<p><%= label_tag 'uid', I18n.t('username') %><br/>
+<%= f.text_field :uid, {:disabled => true} %></p>
 
-<p><%= label_tag 'name', I18n.t('name') %><br />
-<%= f.text_field :name %></p>
+<p><%= label_tag 'givenName', I18n.t('firstname') %><br />
+<%= f.text_field :givenName %></p>
 
-<p><%= label_tag 'password', I18n.t('password') %><br/>
-<%= f.text_field :password %></p>
+<p><%= label_tag 'sn', I18n.t('lastname') %><br />
+<%= f.text_field :sn %></p>
 
-<p><%= label_tag 'email', I18n.t('email') %><br />
-<%= f.text_field :email %></p>
+<p><%= label_tag 'userPassword', I18n.t('password') %><br/>
+<%= f.text_field :userPassword, :value => '' %></p>
 
-<p><%= label_tag 'phone', I18n.t('phone') %><br />
-<%= f.text_field :phone %></p>
+<p><%= label_tag 'mail', I18n.t('email') %><br />
+<%= f.text_field :mail %></p>
 
-<p><%= label_tag 'question', I18n.t('question') %><br />
-<%= f.text_area :question %></p>
-
-<p><%= label_tag 'answer', I18n.t('answer') %><br />
-<%= f.text_area :answer %></p>
+<p><%= label_tag 'homePhone', I18n.t('phone') %><br />
+<%= f.text_field :homePhone %></p>
 
 <p><%= submit_tag t 'edit' %></p>
 <% end -%>
