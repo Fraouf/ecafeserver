@@ -41,6 +41,7 @@ doc\:clobber_rails=Remove rdoc products
 doc\:guides=Generate Rails guides
 doc\:plugins=Generate documentation for all installed plugins
 doc\:plugins\:active_ldap=Generate documentation for the active_ldap plugin
+doc\:plugins\:rails=Generate documentation for the rails plugin
 doc\:plugins\:restful-authentication=Generate documentation for the restful-authentication plugin
 doc\:plugins\:squirrel=Generate documentation for the squirrel plugin
 doc\:rails=Build the RDOC HTML Files

@@ -68,8 +68,6 @@ class ClientsController < ApplicationController
       if @client.state == "connected" && @client.type() == "customer"
         @customer = @client.customer
         @customer.time
-        @customer.crypted_password = nil
-        @customer.salt = nil
         return @customer
       else
         raise XMLRPC::FaultException.new(-12, "Client must be connected with a customer")
@@ -86,7 +84,8 @@ class ClientsController < ApplicationController
       if @client.state =="connected"
         raise XMLRPC::FaultException.new(-10, "Already connected")
       else
-        @customer = Customer.find_by_login(login)
+        @customer = Customer.find_by_uid(login)
+        @ldap_customer = LdapCustomer.find(login)
         operation_type = "operations.utilization"
         operation_controller = "operations.customer"
         operation_action = "operations.connection"
@@ -94,7 +93,7 @@ class ClientsController < ApplicationController
           raise XMLRPC::FaultException.new(-4, "Login not found")
           Operation.add(operation_type, operation_controller, operation_action, "operations.customers.connection_login_invalid, " + login);
         else
-          if !@customer.valid_password?(password)
+          if !@ldap_customer.valid_password?(password)
             raise XMLRPC::FaultException.new(-5, "Password invalid")
             Operation.add(operation_type, operation_controller, operation_action, "operations.customers.connection_password_invalid, " + login)
           else
@@ -104,7 +103,7 @@ class ClientsController < ApplicationController
             else
               @client.connect!
               @customer.update_attribute("last_login_at", Time.now)
-              @client.update_attributes(:customer_id => @customer.id, :last_request => Time.now)
+              @client.update_attributes(:customer_id => @customer.uid, :last_request => Time.now)
               Operation.add(operation_type, operation_controller, operation_action, login)
               return true
             end

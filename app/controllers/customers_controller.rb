@@ -103,7 +103,7 @@ class CustomersController < ApplicationController
   protected
   def get_uid()
     uids = ActiveLdap::Base.search(:base => 'ou=People,dc=ecafe,dc=org', :filter => 'uidNumber=*', :attributes => [ 'uidNumber'])
-    max_uid = 0
+    max_uid = 1100
     uids.each do |uid_array|
       uid = uid_array[1]['uidNumber'][0]
       if uid.to_i > max_uid

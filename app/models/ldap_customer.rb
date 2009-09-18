@@ -10,4 +10,10 @@ class LdapCustomer < ActiveLdap::Base
     encrypted = Digest::SHA1.hexdigest(self.userPassword)
     self.userPassword = '{sha}' + encrypted
   end
+
+  def valid_password?(password)
+    encrypted = Digest::SHA1.hexdigest(password)
+    password_match = '{sha}' + encrypted
+    return password_match == self.userPassword
+  end
 end
