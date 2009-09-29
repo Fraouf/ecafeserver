@@ -103,7 +103,7 @@ class ClientsController < ApplicationController
             else
               @client.connect!
               @customer.update_attribute("last_login_at", Time.now)
-              @client.update_attributes(:customer_id => @customer.uid, :last_request => Time.now)
+              @client.update_attributes(:customer_id => @customer.id, :last_request => Time.now)
               Operation.add(operation_type, operation_controller, operation_action, login)
               return true
             end

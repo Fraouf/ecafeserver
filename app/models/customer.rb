@@ -1,5 +1,4 @@
 class Customer < ActiveRecord::Base
-  set_primary_key "uid"
   has_many :timecodes, :dependent => :destroy
   has_one  :client, :dependent => :destroy
   

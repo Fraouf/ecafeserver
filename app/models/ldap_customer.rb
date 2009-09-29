@@ -1,19 +1,34 @@
-require 'digest/sha1'
+require 'sha1'
+require 'base64'
 class LdapCustomer < ActiveLdap::Base
   ldap_mapping :dn_attribute => "uid",
                :prefix => "ou=People",
                :classes => ['person','posixAccount','shadowAccount','inetOrgPerson']
 
+  belongs_to  :groups,
+              :class => "LdapGroup",
+              :many => "memberUid"
+
   before_save :encrypt_password
+  before_destroy :remove_groups
+
+  def remove_groups()
+    self.groups.each do |group|
+      group.members.delete(self)
+      group.save
+    end
+  end
 
   def encrypt_password()
-    encrypted = Digest::SHA1.hexdigest(self.userPassword)
-    self.userPassword = '{sha}' + encrypted
+    encrypted = Base64.encode64(SHA1.sha1(self.userPassword).digest).chomp
+    self.userPassword = '{SHA}' + encrypted
   end
 
   def valid_password?(password)
-    encrypted = Digest::SHA1.hexdigest(password)
-    password_match = '{sha}' + encrypted
-    return password_match == self.userPassword
+    self.bind(password)
+    self.remove_connection
+    true
+    rescue ActiveLdap::AuthenticationError, ActiveLdap::LdapError::UnwillingToPerform
+      false
   end
 end

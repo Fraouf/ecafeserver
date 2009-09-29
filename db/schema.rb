@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(:version => 20090904160538) do
     t.string   "session_id",   :limit => 36
     t.string   "state"
     t.integer  "timecode_id"
-    t.string   "customer_id",  :limit => 40
+    t.integer  "customer_id"
     t.datetime "last_request"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -107,7 +107,7 @@ ActiveRecord::Schema.define(:version => 20090904160538) do
     t.string   "code"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "customer_id"
+    t.integer  "customer_id"
   end
 
 end
