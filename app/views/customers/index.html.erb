@@ -15,8 +15,8 @@
 	<% @customers.each do |customer| %>
 	<tr>
 		<td><%= customer.uid %></td>
-		<td><%= customer.cn %></td>
-		<td><%= customer.mail %></td>
+		<td><%= customer.ldap_customer.cn %></td>
+		<td><%= customer.ldap_customer.mail %></td>
 		<td><%= link_to I18n.t('show'), customer_path(customer) %></td>
 	</tr>
 	<% end %>

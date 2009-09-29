@@ -11,12 +11,12 @@ class CustomersController < ApplicationController
     #else
     #  @customers = LdapCustomer.paginate :conditions => ["login LIKE ?",  params[:q].concat("%")], :page => params[:page], :order => "created_at DESC"
     #end
-    @customers = LdapCustomer.find(:all)
+    @customers = Customer.find(:all)
   end
 
   def show
     @customer = Customer.find(params[:id])
-    @ldap_customer = LdapCustomer.find(params[:id])
+    @ldap_customer = @customer.ldap_customer
   end
 
   def create

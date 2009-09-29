@@ -12,6 +12,10 @@ class Customer < ActiveRecord::Base
     write_attribute("time", @time)
     return @time
   end
+
+  def ldap_customer
+    return LdapCustomer.find(self.uid)
+  end
   
 
   # Decrements the timecode that expires first or does not decrement anything if the customer has unlimited time left
