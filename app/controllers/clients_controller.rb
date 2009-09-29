@@ -67,8 +67,15 @@ class ClientsController < ApplicationController
     else
       if @client.state == "connected" && @client.type() == "customer"
         @customer = @client.customer
-        @customer.time
-        return @customer
+        @clientcustomer = ClientCustomer.new
+        @clientcustomer.name = @customer.ldap_customer.givenName
+        @clientcustomer.email = @customer.ldap_customer.mail
+        @clientcustomer.phone = @customer.ldap_customer.homePhone
+        @clientcustomer.login = @customer.uid
+        @clientcustomer.last_login_at = @customer.last_login_at
+        @clientcustomer.created_at = @customer.created_at
+        @clientcustomer.time = @customer.time
+        return @clientcustomer
       else
         raise XMLRPC::FaultException.new(-12, "Client must be connected with a customer")
       end
