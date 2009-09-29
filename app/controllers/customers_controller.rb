@@ -50,7 +50,8 @@ class CustomersController < ApplicationController
   end
 
   def update
-    @customer = LdapCustomer.find(params[:id])
+    @db_customer = Customer.find(params[:id])
+    @customer = LdapCustomer.find(@db_customer.uid)
     @customer.givenName = params[:customer][:givenName]
     @customer.sn = params[:customer][:sn]
     @customer.cn = params[:customer][:givenName] + ' ' + params[:customer][:sn]
