@@ -14,7 +14,7 @@
           <td><%= client.hostname %></td>
           <td><%= client.state %></td>
           <td><% if(!client.timecode.nil?) %><%= client.timecode.code %><% end %></td>
-          <td><% if(!client.customer.nil?) %><%= client.customer.login %><% end %></td>
+          <td><% if(!client.customer.nil?) %><%= client.customer.uid %><% end %></td>
   </tr>
   <% end %>
 </table>
