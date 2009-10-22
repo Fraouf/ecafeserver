@@ -2,7 +2,7 @@ development:
   host: 127.0.0.1
   base: dc=ecafe,dc=org
   bind_dn: cn=admin,dc=ecafe,dc=org
-  password: slapd
+  password: secret
 
 test:
   host: 127.0.0.1
@@ -12,7 +12,7 @@ test:
 
 production:
   host: 127.0.0.1
-  method: :tls
-  base: dc=production,dc=local,dc=net
-  bind_dn: cn=admin,dc=local,dc=net
+  # method: :tls
+  base: dc=ecafe,dc=org
+  bind_dn: cn=admin,dc=ecafe,dc=org
   password: secret

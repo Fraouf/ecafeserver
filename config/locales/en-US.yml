@@ -126,7 +126,7 @@
       connection_login_invalid: "USERNAME INVALID"
       connection_password_invalid: "PASSWORD INVALID"
       connection_no_time_left: "NO TIME LEFT"
-  statistics:
+  statistic:
     day_amount: "Total sales of the day"
     day_timecodes: "Nombre of timecodes sold"
     day_customers: "Number of customers created"
