@@ -19,10 +19,12 @@
 
 class EmployeeIsAdmin < ActiveRecord::Migration
   def self.up
-	add_column :employees, :is_admin, :boolean
+    add_column :employees, :is_admin, :boolean
+    Employee.delete_observers
+    Employee.create :login => "admin", :name => "Default administrator", :password => "admin", :password_confirmation => "admin", :is_admin => "1"
   end
 
   def self.down
-	remove_column :employees, :is_admin
+    remove_column :employees, :is_admin
   end
 end
