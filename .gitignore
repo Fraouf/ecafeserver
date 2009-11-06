@@ -4,3 +4,4 @@
 /log/*.log
 /config/database.yml
 /config/ldap.yml
+/nbproject
