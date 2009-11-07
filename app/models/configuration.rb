@@ -35,25 +35,18 @@ class Configuration
 		
 	protected
 	def configuration_file
-		return RAILS_ROOT+"/config/configuration"
-	end
-	
-	def get
-		f = File.new(configuration_file, "r")
-		locale = f.readline.chomp
-		f.close
-		out = { "locale" => locale }
-		return out
+		return RAILS_ROOT+"/config/config.yml"
 	end
 	
 	def set
-		f = File.open(configuration_file, "w")
-		f.puts(@locale)
-		f.close
+		a_config = YAML.load_file configuration_file
+		a_config[RAILS_ENV]["language"] = @locale
+		File.open(configuration_file, 'w') { |f| YAML.dump(a_config, f) }
+		APP_CONFIG['language'] = @locale
 	end
 	
 	def initialize
 		out = get
-		@locale = out['locale']
+		@locale = APP_CONFIG['language']
 	end
 end

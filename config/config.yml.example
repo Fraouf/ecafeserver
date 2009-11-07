@@ -1,0 +1,14 @@
+# config/config.yml.example
+# In this file, you can set the language and the partition on which the
+# user home directories are stored. Make sure the partition is set
+# correctly, otherwise the quota system will not work
+
+production: 
+  language: en-US
+  qpartition: /dev/sda1
+development: 
+  language: fr-FR
+  qpartition: /dev/sda1
+test: 
+  language: en-US
+  qpartition: /dev/sda1
