@@ -47,6 +47,10 @@ class CustomersController < ApplicationController
     @customer.uid_number = get_uid()
     @customer.home_directory = "/home/" + params[:customer][:uid]
     @customer.loginShell = "/bin/bash"
+    # Format of the quota attribute:
+    # Partition:Soft limit in blocks:Hard limit in blocks:Soft limit in files:Hard limit in files
+    # 40960 blocks = 10 MB on a filesystem which has 4096 as the block size
+    @customer.quota = "/dev/sda1:204800:245760:0:0"
     @group = LdapGroup.find("customers")
     if @customer.save
       success = @db_customer && @db_customer.save

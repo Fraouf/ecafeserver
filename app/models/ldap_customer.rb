@@ -22,7 +22,7 @@ require 'base64'
 class LdapCustomer < ActiveLdap::Base
   ldap_mapping :dn_attribute => "uid",
                :prefix => "ou=People",
-               :classes => ['person','posixAccount','shadowAccount','inetOrgPerson']
+               :classes => ['person','posixAccount','shadowAccount','inetOrgPerson','systemQuotas']
 
   belongs_to  :groups,
               :class => "LdapGroup",
