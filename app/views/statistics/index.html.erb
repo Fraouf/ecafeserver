@@ -19,7 +19,9 @@
     <td><%= @day_customers %></td>
   </tr>
 </table>
+<br />
 <%= link_to t('sales'), {:controller => "sales", :action => "index"} %><br />
+<br />
 <% if is_admin? %>
 <%= link_to t('operations.operations'), {:controller => "operations", :action => "index"} %>
 <% end %>

@@ -23,6 +23,8 @@ class SalesController < ApplicationController
   def index
     if(params[:commit].nil?)
       @sales = Sale.paginate :page => params[:page], :order => "created_at DESC"
+      @date_from = Date.today
+      @date_to = @date_from + 1.day
     else
       @date_from = Date.civil(params[:range][:"from(1i)"].to_i,params[:range][:"from(2i)"].to_i,params[:range][:"from(3i)"].to_i)
       @date_to = Date.civil(params[:range][:"to(1i)"].to_i,params[:range][:"to(2i)"].to_i,params[:range][:"to(3i)"].to_i)

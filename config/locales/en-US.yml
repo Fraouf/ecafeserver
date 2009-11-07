@@ -84,6 +84,7 @@
     add_failed: "An error occured while saving this timecode"
     destroy_failed: "You can not destroy a timecode that has already been used"
     destroyed_successfully: "The timecode '{{code}}' was successfully destroyed"
+    choose_model: "Chose the model with which you would like to create this timecode:"
   customers:
     customers: "Customers"
     add_new: "Add a new customer"

@@ -85,6 +85,7 @@
     add_failed: "Impossible de créer ce code-temps"
     destroy_failed: "Vous ne pouvez pas supprimer un code-temps qui a déjà été utilisé"
     destroyed_successfully: "Le code-temps '{{code}}' a été supprimé"
+    choose_model: "Choisissez le modèle à partir duquel vous voudriez créer ce code-temps:"
   customers:
     customers: "Membres"
     add_new: "Ajouter un nouveau membre"
