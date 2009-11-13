@@ -5,7 +5,7 @@
 		<th><%= t 'models.price' %></th>
 		<th><%= t 'models.expiration' %></th>
 		<th><%= t 'models.time' %></th>
-		<% if current_employee.is_admin %>
+		<% if is_admin? %>
                   <th class="nobg"></th>
                  <% end %>
 	</tr>
@@ -23,7 +23,7 @@
 		<% elsif model.time == 0 %>
 		<%= t 'unlimited' %>
 		<% end %></td>
-                <% if current_employee.is_admin %>
+                <% if is_admin? %>
 		<td><%= link_to I18n.t('edit'), edit_model_path(model) %> - 
 			<% form_tag model_path(model), :method => :delete do %>
 			<%= submit_tag t 'delete' %>
@@ -32,7 +32,7 @@
 	</tr>
 	<% end %>
 </table>
-<% if current_employee.is_admin %>
+<% if is_admin? %>
 <br />
 <div style="text-align: right;">
 	<%= link_to I18n.t('models.add_new'), {:controller => "models", :action => "new"} %>

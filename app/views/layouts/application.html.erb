@@ -13,8 +13,8 @@
 </div>
 
 <div id="topbar">
-	<%= current_employee.login %> | 
-	<%= link_to t('my_profile'), {:controller => "employees", :action => "edit_profile"} %> | 
+	<%= current_user.login %> | 
+	<%= link_to t('my_profile'), {:controller => "users", :action => "index"} %> | 
 	<%= link_to t('logout'), logout_path %>
 </div>
 <div class="tabs">
@@ -25,7 +25,7 @@
                 <li><%= link_to t('models.models'), {:controller => "models", :action => "index"} %></li>
                 <li><%= link_to t('statistics'), {:controller => "statistics", :action => "index"}  %></li>
 		<% if is_admin? %>
-			<li><%= link_to t('employees.employees'), {:controller => "employees", :action => "index"} %></li>
+			<li><%= link_to t('employees.employees'), {:controller => "users", :action => "index"} %></li>
 			<li><%= link_to t('config'), {:controller => "configurations", :action => "new"} %></li>
 		<% end %>
 	</ul>

@@ -18,6 +18,7 @@
 # along with Ecafeserver.  If not, see <http://www.gnu.org/licenses/>.
 
 class EmployeesController < ApplicationController
+	before_filter :employee_required
 	before_filter :admin_required, :except => [:edit_profile, :update_profile]
 	
 	def index

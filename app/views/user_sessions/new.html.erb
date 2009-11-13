@@ -1,0 +1,16 @@
+<h1><%= t 'login' %></h1>
+
+<% form_for @user_session do |f| %>
+<p><%= f.label :login %><br />
+<%= f.text_field :login %></p>
+
+<p><%= f.label :password %><br/>
+<%= f.password_field :password %></p>
+
+<!-- Uncomment this if you want this functionality
+<p><%= label_tag 'remember_me', 'Remember me' %>
+<%= check_box_tag 'remember_me', '1', @remember_me %></p>
+-->
+
+<p><%= f.submit t 'login' %></p>
+<% end -%>

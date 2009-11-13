@@ -18,9 +18,9 @@
 # along with Ecafeserver.  If not, see <http://www.gnu.org/licenses/>.
 
 class PagesController < ApplicationController
-	before_filter :login_required
+	before_filter :employee_required
 	
 	def index
-    @clients = Client.all
+    	@clients = Client.all
 	end
 end

@@ -1,0 +1,24 @@
+<h1><%= t 'users.users'%></h1>
+<table id="users">
+	<tr>
+		<th><%= t 'username' %></th>
+		<th><%= t 'name' %></th>
+		<th><%= t 'group' %></th>
+		<th class="nobg"></th>
+	</tr>
+	<% @users.each do |user| %>
+	<tr>
+		<td><%= user.uid %></td>
+		<td><%= user.cn %></td>
+		<td><%= user.group %></td>
+		<td><%= link_to I18n.t('edit'), edit_user_path(user) %> - 
+			<% form_tag user_path(user), :method => :delete do %>
+			<%= submit_tag t 'delete' %>
+			<% end %></td>
+	</tr>
+	<% end %>
+</table>
+<br />
+<div style="text-align: right;">
+	<%= link_to I18n.t('employees.add_new'), :controller => "users", :action => "new" %>
+</div>

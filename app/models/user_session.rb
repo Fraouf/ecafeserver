@@ -1,0 +1,11 @@
+class UserSession < Authlogic::Session::Base
+	find_by_login_method :find_or_create_from_ldap
+	verify_password_method :valid_ldap_credentials?
+	
+	# gettext_activerecord defines a gettext method for the activerecord
+	# Validations module. Authlogic uses these Validations also but does
+	# not define the gettext method. We define it here instead.
+	def gettext(str)
+		GetText._(str)
+	end 
+end

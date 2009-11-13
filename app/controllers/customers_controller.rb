@@ -18,7 +18,7 @@
 # along with Ecafeserver.  If not, see <http://www.gnu.org/licenses/>.
 
 class CustomersController < ApplicationController
-  before_filter :login_required
+  before_filter :employee_required
   
   def new
     @customer = LdapCustomer.new
@@ -39,18 +39,18 @@ class CustomersController < ApplicationController
   end
 
   def create
-		@db_customer = Customer.new
+	@db_customer = Customer.new
     @db_customer.uid = params[:customer][:uid]
     @customer = LdapCustomer.new(params[:customer])
     @customer.cn = @customer.givenName + ' ' + @customer.sn
     @customer.gid_number = 1100
-    @customer.uid_number = get_uid()
+    @customer.uid_number = get_ldap_uid()
     @customer.home_directory = "/home/" + params[:customer][:uid]
     @customer.loginShell = "/bin/bash"
     # Format of the quota attribute:
     # Partition:Soft limit in blocks:Hard limit in blocks:Soft limit in files:Hard limit in files
     # 40960 blocks = 10 MB on a filesystem which has 4096 as the block size
-    @customer.quota = "/dev/sda1:204800:245760:0:0"
+    @customer.quota = APP_CONFIG['qpartition'] + ":204800:245760:0:0"
     @group = LdapGroup.find("customers")
     if @customer.save
       success = @db_customer && @db_customer.save
@@ -124,18 +124,5 @@ class CustomersController < ApplicationController
         end
       end
 		end
-  end
-
-  protected
-  def get_uid()
-    uids = ActiveLdap::Base.search(:base => 'ou=People,dc=ecafe,dc=org', :filter => 'uidNumber=*', :attributes => [ 'uidNumber'])
-    max_uid = 1100
-    uids.each do |uid_array|
-      uid = uid_array[1]['uidNumber'][0]
-      if uid.to_i > max_uid
-        max_uid = uid.to_i
-      end
-    end
-    return max_uid + 1
   end
 end

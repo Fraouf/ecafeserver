@@ -17,35 +17,27 @@
 # You should have received a copy of the GNU General Public License
 # along with Ecafeserver.  If not, see <http://www.gnu.org/licenses/>.
 
-require 'singleton'
-class Configuration
-	include Singleton
+class UserSessionsController < ApplicationController
+	def new
+		@user_session = UserSession.new()
+	end
 	
-	attr_reader :locale
-	
-	def save (params)
-		locale = params[:country]
-		if (!AVAILABLE_LOCALES.include?(locale))
-			return 'invalid_locale'
+	def create
+		@user_session = UserSession.new(params[:user_session])
+		if @user_session.save
+			flash[:notice] = t 'sessions.login_successful'
+			redirect_to :controller => 'pages', :action => 'index'
+		else
+			flash[:error] = t('sessions.login_failed')
+			render :action => 'new'
 		end
-		@locale = locale
-		set
-		return true
 	end
-		
-	protected
-	def configuration_file
-		return RAILS_ROOT+"/config/config.yml"
+
+	def destroy
+		@user_session = UserSession.find
+		@user_session.destroy
+		flash[:notice] = t 'sessions.logout'
+		redirect_to root_url
 	end
-	
-	def set
-		a_config = YAML.load_file configuration_file
-		a_config[RAILS_ENV]["language"] = @locale
-		File.open(configuration_file, 'w') { |f| YAML.dump(a_config, f) }
-		APP_CONFIG['language'] = @locale
-	end
-	
-	def initialize
-		@locale = APP_CONFIG['language']
-	end
+
 end

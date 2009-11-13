@@ -18,7 +18,7 @@
 # along with Ecafeserver.  If not, see <http://www.gnu.org/licenses/>.
 
 class StatisticsController < ApplicationController
-  before_filter :login_required
+  before_filter :employee_required
 
   def index
     if(params[:commit].nil?)

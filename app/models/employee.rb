@@ -20,9 +20,9 @@
 require 'digest/sha1'
 
 class Employee < ActiveRecord::Base
-  include Authentication
-  include Authentication::ByPassword
-  include Authentication::ByCookieToken
+  #include Authentication
+  #include Authentication::ByPassword
+  #include Authentication::ByCookieToken
 
   HUMAN_ATTRIBUTES = {
 	:login	=>	"",
@@ -30,12 +30,12 @@ class Employee < ActiveRecord::Base
 	:password	=>	I18n.t('employees.password'),
 	:password_confirmation	=> I18n.t('employees.password_confirmation')
   }
-  validates_presence_of     :login,    :message => :employee_login_presence
-  validates_length_of       :login,    :within => 3..40, :message => :employee_login_length
-  validates_uniqueness_of   :login,    :message => :employee_login_unique
-  validates_format_of       :login,    :with => Authentication.login_regex, :message => :employee_bad_login_message
+  #validates_presence_of     :login,    :message => :employee_login_presence
+  #validates_length_of       :login,    :within => 3..40, :message => :employee_login_length
+  #validates_uniqueness_of   :login,    :message => :employee_login_unique
+  #validates_format_of       :login,    :with => Authentication.login_regex, :message => :employee_bad_login_message
 
-  validates_format_of       :name,     :with => Authentication.name_regex,  :message => :employee_bad_name_message, :allow_nil => true
+  #validates_format_of       :name,     :with => Authentication.name_regex,  :message => :employee_bad_name_message, :allow_nil => true
   validates_length_of       :name,     :maximum => 100, :message => :employee_name_length
 
   
