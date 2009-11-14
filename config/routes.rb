@@ -3,8 +3,8 @@ ActionController::Routing::Routes.draw do |map|
   map.logout '/logout', :controller => 'user_sessions', :action => 'destroy'
   #map.register '/register', :controller => 'employees', :action => 'create'
   #map.signup '/signup', :controller => 'employees', :action => 'new'
-  map.resources :employees, :collection => { :edit_profile => :get, :update_profile => :post }
-  map.resources :models, :timecodes, :sales, :operations, :customers, :clients, :users, :user_sessions
+  map.resources :users, :collection => { :edit_profile => :get, :update_profile => :post }
+  map.resources :models, :timecodes, :sales, :operations, :customers, :clients, :user_sessions
   map.resource :session, :configuration
 
   map.connects '/clients/:action', :controller => 'clients'

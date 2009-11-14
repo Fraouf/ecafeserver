@@ -14,7 +14,7 @@
 
 <div id="topbar">
 	<%= current_user.login %> | 
-	<%= link_to t('my_profile'), {:controller => "users", :action => "index"} %> | 
+	<%= link_to t('my_profile'), {:controller => "users", :action => "edit_profile"} %> | 
 	<%= link_to t('logout'), logout_path %>
 </div>
 <div class="tabs">

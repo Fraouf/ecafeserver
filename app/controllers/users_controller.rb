@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 	def index
-		@users = LdapUser.find :all
+		@users = User.find :all
 	end
 	
 	def new
@@ -10,18 +10,22 @@ class UsersController < ApplicationController
 	end
 	
 	def create
-		@user = LdapUser.new(params[:user])
+		# DB user
+		@user = User.new
+		@user.login = params[:user][:uid]
+		# LDAP user
+		@ldapuser = LdapUser.new(params[:user])
 		@group = LdapGroup.find(params[:group])
-		@user.gid_number = @group.gidNumber
-		@user.cn = @user.givenName + ' ' + @user.sn
-    	@user.uid_number = get_ldap_uid()
-    	@user.home_directory = "/home/" + params[:user][:uid]
-    	@user.loginShell = "/bin/bash"
+		@ldapuser.gid_number = @group.gidNumber
+		@ldapuser.cn = @ldapuser.givenName + ' ' + @ldapuser.sn
+    	@ldapuser.uid_number = get_ldap_uid()
+    	@ldapuser.home_directory = "/home/" + params[:user][:uid]
+    	@ldapuser.loginShell = "/bin/bash"
 		# Unlimited quotas for employees
-		@user.quota = APP_CONFIG['qpartition'] + ":0:0:0:0"
-		if @user.save
-			@group.members << @user
-			if @user.errors.empty?
+		@ldapuser.quota = APP_CONFIG['qpartition'] + ":0:0:0:0"
+		if @ldapuser.save && @user.save
+			@group.members << @ldapuser
+			if @ldapuser.errors.empty?
 				redirect_to :controller => "users", :action => "index"
 				flash[:notice] = t 'users.added_successfully'
 			else
@@ -29,27 +33,62 @@ class UsersController < ApplicationController
 			end
 		else
 			render :action => 'new'
-			logger.debug(@user.errors.full_messages)
+			logger.debug(@ldapuser.errors.full_messages)
+		end
+	end
+	
+	def edit_profile
+		@user = current_user
+	end
+	
+	def update_profile
+		@user = current_user
+		@ldapuser = @user.ldap_entry
+		@ldapuser.givenName = params[:user][:givenName]
+		@ldapuser.sn = params[:user][:sn]
+		@ldapuser.cn = params[:user][:givenName] + ' ' + params[:user][:sn]
+		if(params[:user][:userPassword] != '')
+			@ldapuser.userPassword = params[:user][:userPassword]
+		end
+		@ldapuser.mail = params[:user][:mail]
+		@ldapuser.homePhone = params[:user][:homePhone]
+		if @ldapuser.save
+			redirect_to :controller => "users", :action => "edit_profile"
+			flash[:notice] = t 'users.edit_successful'
+		else
+			render :action => 'edit'
 		end
 	end
 
 	def edit
-		@user = current_user
+		@user = User.find(params[:id])
+		@groups = LdapGroup.find :all
 	end
 
 	def update
-		@user = current_user
-		if @user.update_attributes(params[:user])
-			flash[:notice] = "Successfully updated profile."
-			redirect_to root_url
+		@user = User.find(params[:id])
+		@ldapuser = @user.ldap_entry
+		@ldapuser.givenName = params[:user][:givenName]
+		@ldapuser.sn = params[:user][:sn]
+		@ldapuser.cn = params[:user][:givenName] + ' ' + params[:user][:sn]
+		if(params[:user][:userPassword] != '')
+			@ldapuser.userPassword = params[:user][:userPassword]
+		end
+		@ldapuser.mail = params[:user][:mail]
+		@ldapuser.homePhone = params[:user][:homePhone]
+		if @ldapuser.save
+			redirect_to :controller => "users", :action => "index"
+			flash[:notice] = t 'users.edit_successful'
 		else
 			render :action => 'edit'
 		end
 	end
 	
 	def destroy
-		if LdapUser.exists?(params[:id])
-			LdapCustomer.destroy(params[:id])
+		@user = User.find(params[:id])
+		if @user
+			@user.ldap_entry.destroy
+			@user.destroy
 			flash[:notice] = t 'users.deleted_successfully'
 			redirect_to :controller => "users", :action => "index"
 		end

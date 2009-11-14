@@ -1,7 +1,7 @@
-<h1><%= t 'users.edit_header' %></h1>
+<h1><%= t 'users.edit_profile' %></h1>
 
 <%= error_messages_for :user, :header_message => I18n.t('users.edit_failed') %>
-<% form_for :user, @user.ldap_entry, :url => { :action => "update" }, :html => { :method => :put } do |f| -%>
+<% form_for :user, @user.ldap_entry, :url => { :action => "update_profile" }, :html => { :method => :post } do |f| -%>
 <p><%= label_tag 'uid', I18n.t('username') %><br/>
 <%= f.text_field :uid, {:disabled => true} %></p>
 
@@ -19,9 +19,6 @@
 
 <p><%= label_tag 'homePhone', I18n.t('phone') %><br />
 <%= f.text_field :homePhone %></p>
-
-<p><%= label_tag 'group', I18n.t('group') %><br />
-<%= select_tag 'group', options_from_collection_for_select(@groups, :cn, :cn, @user.ldap_entry.group) %></p> 
 
 <p><%= submit_tag t 'edit' %></p>
 <% end -%>

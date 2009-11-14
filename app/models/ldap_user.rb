@@ -1,3 +1,5 @@
+require 'digest/sha1'
+
 class LdapUser < ActiveLdap::Base
   ldap_mapping :dn_attribute => "uid",
                :prefix => "ou=people",
@@ -18,8 +20,10 @@ class LdapUser < ActiveLdap::Base
   end
 
   def encrypt_password()
-    encrypted = Base64.encode64(SHA1.sha1(self.userPassword).digest).chomp
-    self.userPassword = '{SHA}' + encrypted
+  	unless self.userPassword.starts_with? '{SHA}'
+    	encrypted = Base64.encode64(Digest::SHA1.digest(self.userPassword)).chomp
+    	self.userPassword = '{SHA}' + encrypted
+    end
   end
 
   def valid_password?(password)

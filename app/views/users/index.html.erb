@@ -8,9 +8,9 @@
 	</tr>
 	<% @users.each do |user| %>
 	<tr>
-		<td><%= user.uid %></td>
-		<td><%= user.cn %></td>
-		<td><%= user.group %></td>
+		<td><%= user.login %></td>
+		<td><%= user.ldap_entry.cn %></td>
+		<td><%= user.ldap_entry.group %></td>
 		<td><%= link_to I18n.t('edit'), edit_user_path(user) %> - 
 			<% form_tag user_path(user), :method => :delete do %>
 			<%= submit_tag t 'delete' %>
