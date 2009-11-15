@@ -1,6 +1,29 @@
+# Copyright (C) 2009 Guillaume Viguier-Just
+#
+# Author: Guillaume Viguier-Just <guillaume@viguierjust.com>
+#
+# This file is part of ecafeserver.
+#
+# Ecafeserver is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Ecafeserver is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Ecafeserver.  If not, see <http://www.gnu.org/licenses/>.
+
 class UsersController < ApplicationController
 	def index
 		@users = User.find :all
+	end
+	
+	def show
+		@user = User.find(params[:id])
 	end
 	
 	def new
@@ -18,9 +41,9 @@ class UsersController < ApplicationController
 		@group = LdapGroup.find(params[:group])
 		@ldapuser.gid_number = @group.gidNumber
 		@ldapuser.cn = @ldapuser.givenName + ' ' + @ldapuser.sn
-    	@ldapuser.uid_number = get_ldap_uid()
-    	@ldapuser.home_directory = "/home/" + params[:user][:uid]
-    	@ldapuser.loginShell = "/bin/bash"
+		@ldapuser.uid_number = get_ldap_uid()
+		@ldapuser.home_directory = "/home/" + params[:user][:uid]
+		@ldapuser.loginShell = "/bin/bash"
 		# Unlimited quotas for employees
 		@ldapuser.quota = APP_CONFIG['qpartition'] + ":0:0:0:0"
 		if @ldapuser.save && @user.save
@@ -93,5 +116,27 @@ class UsersController < ApplicationController
 			redirect_to :controller => "users", :action => "index"
 		end
 	end
+	
+	def new_credit
+		@models = Model.find(:all)
+		@user = User.find(params[:id])
+	end
 
+	def create_credit
+		@model = Model.find_by_id(params[:model][:id])
+		if @model
+			@timecode = Timecode.new_from_model(@model)
+			@user = User.find(params[:id])
+			if @user
+				@timecode.user = @user
+				if @timecode.save
+					flash[:notice] = I18n.t('timecodes.added_successfully', :code => @timecode.code)
+					redirect_to :controller => "users", :action => "show", :id => @user.id
+				else
+					flash[:error] = t 'timecodes.add_failed'
+					redirect_to :controller => "users", :action => "new_credit", :id => @user.id
+				end
+			end
+		end
+	end
 end

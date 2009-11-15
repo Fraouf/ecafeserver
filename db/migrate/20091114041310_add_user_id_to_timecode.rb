@@ -17,13 +17,12 @@
 # You should have received a copy of the GNU General Public License
 # along with Ecafeserver.  If not, see <http://www.gnu.org/licenses/>.
 
-class CustomerObserver < ActiveRecord::Observer
-  #TODO: implement a credit operation ??
-  def after_create(customer)
-    Operation.add("operations.administration", "operations.customer", "operations.create", customer.uid)
+class AddUserIdToTimecode < ActiveRecord::Migration
+  def self.up
+    add_column :timecodes, :user_id, :integer
   end
 
-   def after_destroy(customer)
-    Operation.add("operations.administration", "operations.customer", "operations.destroy", customer.uid)
+  def self.down
+    remove_column :timecodes, :user_id
   end
 end

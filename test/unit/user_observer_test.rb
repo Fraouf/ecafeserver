@@ -1,8 +1,8 @@
 require 'test_helper'
 
-class LdapCustomerTest < Test::Unit::TestCase
+class UserObserverTest < ActiveSupport::TestCase
   # Replace this with your real tests.
-  def test_truth
+  test "the truth" do
     assert true
   end
 end

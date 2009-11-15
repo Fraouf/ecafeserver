@@ -8,7 +8,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :session, :configuration
 
   map.connects '/clients/:action', :controller => 'clients'
-  map.connects '/customers/:action/:id', :controller => 'customers'
+  map.connects '/users/:action/:id', :controller => 'users'
   
   map.connect '/pages/:action.:format', :controller => 'pages'
   map.connect '/statistics/:action.:format', :controller => 'statistics'

@@ -11,14 +11,11 @@
 		<td><%= user.login %></td>
 		<td><%= user.ldap_entry.cn %></td>
 		<td><%= user.ldap_entry.group %></td>
-		<td><%= link_to I18n.t('edit'), edit_user_path(user) %> - 
-			<% form_tag user_path(user), :method => :delete do %>
-			<%= submit_tag t 'delete' %>
-			<% end %></td>
+		<td><%= link_to I18n.t('show'), user_path(user) %></td>
 	</tr>
 	<% end %>
 </table>
 <br />
 <div style="text-align: right;">
-	<%= link_to I18n.t('employees.add_new'), :controller => "users", :action => "new" %>
+	<%= link_to I18n.t('users.add_new'), :controller => "users", :action => "new" %>
 </div>

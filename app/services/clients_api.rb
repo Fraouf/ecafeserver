@@ -22,7 +22,7 @@ class ClientStatus < ActionWebService::Struct
   member :type,       :string
 end
 
-class ClientCustomer < ActionWebService::Struct
+class ClientUser < ActionWebService::Struct
   member  :name,    :string
   member  :email,   :string
   member  :phone,   :string
@@ -39,8 +39,8 @@ class ClientsApi < ActionWebService::API::Base
   api_method :unregister, :expects => [{:session_id => :string}]
   api_method :status, :expects => [{:session_id => :string}], :returns => [ClientStatus]
   api_method :get_timecode, :expects => [{:session_id => :string}], :returns => [Timecode]
-  api_method :get_customer, :expects => [{:session_id => :string}], :returns => [ClientCustomer]
-  api_method :connect_customer, :expects=> [{:session_id => :string},
+  api_method :get_user, :expects => [{:session_id => :string}], :returns => [ClientUser]
+  api_method :connect_user, :expects=> [{:session_id => :string},
                                             {:login => :string},
                                             {:password => :string}], :returns => [:boolean]
   api_method :connect_timecode, :expects => [{:session_id => :string},

@@ -18,9 +18,9 @@
 # along with Ecafeserver.  If not, see <http://www.gnu.org/licenses/>.
 
 class Sale < ActiveRecord::Base
-  belongs_to :timecode
+	belongs_to :timecode
 
-  def self.per_page
-    30
-    end
+	def self.per_page
+		30
+	end
 end

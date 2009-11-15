@@ -22,7 +22,7 @@ class Client < ActiveRecord::Base
   set_primary_key "session_id"
   include UuidHelper
   include AASM
-  belongs_to :customer
+  belongs_to :user
   belongs_to :timecode
 
   validates_presence_of :ip_address
@@ -48,14 +48,14 @@ class Client < ActiveRecord::Base
   end
   
   def type
-    if self.customer.nil?
+    if self.user.nil?
       if self.timecode.nil?
         return ""
       else
         return "timecode"
       end
     else
-      return "customer"
+      return "user"
     end
   end
 

@@ -17,16 +17,23 @@
 # You should have received a copy of the GNU General Public License
 # along with Ecafeserver.  If not, see <http://www.gnu.org/licenses/>.
 
-class CreateCustomers < ActiveRecord::Migration
-  def self.up
-    create_table :customers do |t|
-      t.string :uid, :limit => 40
-      t.datetime :last_login_at
-      t.timestamps
-    end
-  end
+class UserObserver < ActiveRecord::Observer
+	def after_create(user)
+		Operation.add("operations.administration", "operations.user", "operations.create", user.login)
+	end
 
-  def self.down
-    drop_table :customers
-  end
+	def after_destroy(user)
+		Operation.add("operations.administration", "operations.user", "operations.destroy", user.login)
+	end
+
+	# TODO: fix a bug that displays that the employee updated his profile at each login
+	#def after_update(employee)
+	#  if employee.is_a?(Employee) && !Employee.current.nil?
+	#    if employee.login == Employee.current.login
+	#      Operation.add(I18n.t('operations.employees.update_profile', :login => employee.login))
+	#    else
+	#      Operation.add(I18n.t('operations.employees.update', :login => employee.login))
+	#    end
+	#  end
+	#end
 end

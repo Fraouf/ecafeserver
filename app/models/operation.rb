@@ -18,16 +18,16 @@
 # along with Ecafeserver.  If not, see <http://www.gnu.org/licenses/>.
 
 class Operation < ActiveRecord::Base
-  def self.add(type, controller, action, arguments)
-    user = ''
-    unless Employee.current.nil?
-      user = Employee.current.login
-    end
-    operation = Operation.new(:user => user, :operation_type => type, :controller => controller, :action => action, :arguments => arguments)
-    operation.save
-  end
+	def self.add(type, controller, action, arguments)
+		user = ''
+		unless User.current.nil?
+			user = User.current.login
+		end
+		operation = Operation.new(:user => user, :operation_type => type, :controller => controller, :action => action, :arguments => arguments)
+		operation.save
+	end
 
-  def self.per_page
-    30
-  end
+	def self.per_page
+		30
+	end
 end

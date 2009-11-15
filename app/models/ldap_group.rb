@@ -23,7 +23,7 @@ class LdapGroup < ActiveLdap::Base
                :classes => ["posixGroup", "top"]
 
   has_many     :members,
-               :class => "LdapCustomer",
+               :class => "LdapUser",
                :wrap => "memberUid",
                :primary_key => "uid"
 end

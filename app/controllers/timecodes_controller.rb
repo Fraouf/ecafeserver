@@ -21,11 +21,11 @@ class TimecodesController < ApplicationController
 	before_filter :employee_required
 	
 	def index
-    if(params[:q].nil?)
-      @timecodes = Timecode.paginate :conditions => ["customer_id IS NULL"], :page => params[:page], :order => "created_at DESC"
-    else
-      @timecodes = Timecode.paginate :conditions => ["customer_id IS NULL AND code LIKE ?",  params[:q] + "%"], :page => params[:page], :order => "created_at DESC"
-    end
+		if(params[:q].nil?)
+			@timecodes = Timecode.paginate :conditions => ["user_id IS NULL"], :page => params[:page], :order => "created_at DESC"
+		else
+			@timecodes = Timecode.paginate :conditions => ["user_id IS NULL AND code LIKE ?",  params[:q] + "%"], :page => params[:page], :order => "created_at DESC"
+		end
 	end
 	
 	def new
@@ -50,25 +50,25 @@ class TimecodesController < ApplicationController
 		@timecode = Timecode.find_by_id(params[:id])
 		if @timecode
 			code = @timecode.code
-      customer_id = @timecode.customer_id
-			if current_employee.is_admin # The employee is an admin, he can delete whatever he wants
-        destroy_sale(@timecode) if @timecode.created_at == @timecode.updated_at
+			user_id = @timecode.user_id
+			if current_user.is_admin # The employee is an admin, he can delete whatever he wants
+				destroy_sale(@timecode) if @timecode.created_at == @timecode.updated_at
 				@timecode.destroy
-				destroy_success(code, customer_id)
+				destroy_success(code, user_id)
 			else #The employee is a basic employee, he can delete timecodes that have never been used only
 				if @timecode.created_at == @timecode.updated_at
-          # Destroy sale associated with timecode
-          destroy_sale(@timecode)
+					# Destroy sale associated with timecode
+					destroy_sale(@timecode)
 					@timecode.destroy
-					destroy_success(code, customer_id)
+					destroy_success(code, user_id)
 				else
 					Operation.add("operations.administration", "operations.timecode", "operations.destroy", "operations.timecodes.destroy_failed, " + code)
 					flash[:error] = t 'timecodes.destroy_failed'
-          if (customer_id.nil?)
-            redirect_to :controller => "timecodes", :action => "index"
-          else
-            redirect_to :controller => "customers", :action => "show", :id => customer_id
-          end
+					if (user_id.nil?)
+						redirect_to :controller => "timecodes", :action => "index"
+					else
+						redirect_to :controller => "users", :action => "show", :id => user_id
+					end
 				end
 			end
 		end
@@ -76,18 +76,18 @@ class TimecodesController < ApplicationController
 	
 	protected
 	
-	def destroy_success (code, customer_id)
+	def destroy_success (code, user_id)
 		flash[:notice] = I18n.t('timecodes.destroyed_successfully', :code => code)
-    if customer_id.nil?
-      redirect_to :controller => "timecodes", :action => "index"
-    else
-      redirect_to :controller => "customers", :action => "show", :id => customer_id
-    end
+		if user_id.nil?
+			redirect_to :controller => "timecodes", :action => "index"
+		else
+			redirect_to :controller => "users", :action => "show", :id => user_id
+		end
 	end
 
-  def destroy_sale(timecode)
-    sale = Sale.find_by_timecode_id(timecode.id)
-    sale.destroy unless sale.nil?
-  end
+	def destroy_sale(timecode)
+		sale = Sale.find_by_timecode_id(timecode.id)
+		sale.destroy unless sale.nil?
+	end
 		
 end

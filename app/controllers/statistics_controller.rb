@@ -18,21 +18,21 @@
 # along with Ecafeserver.  If not, see <http://www.gnu.org/licenses/>.
 
 class StatisticsController < ApplicationController
-  before_filter :employee_required
+	before_filter :employee_required
 
-  def index
-    if(params[:commit].nil?)
-      @date = Date.today
-    else
-      @date = Date.civil(params[:range][:"from(1i)"].to_i,params[:range][:"from(2i)"].to_i,params[:range][:"from(3i)"].to_i)
-    end
-    @time = @date.midnight
-    @day_amount = 0
-    Sale.find_each(:conditions => { :created_at => (@time)..(@time + 1.day) }) do |sale|
-      @day_amount += sale.amount
-    end
-    @day_timecodes = Timecode.count(:conditions => { :created_at => (@time)..(@time + 1.day) })
-    @day_customers = Customer.count(:conditions => { :created_at => (@time)..(@time + 1.day) })
-  end
+	def index
+		if(params[:commit].nil?)
+			@date = Date.today
+		else
+			@date = Date.civil(params[:range][:"from(1i)"].to_i,params[:range][:"from(2i)"].to_i,params[:range][:"from(3i)"].to_i)
+		end
+		@time = @date.midnight
+		@day_amount = 0
+		Sale.find_each(:conditions => { :created_at => (@time)..(@time + 1.day) }) do |sale|
+			@day_amount += sale.amount
+		end
+		@day_timecodes = Timecode.count(:conditions => { :created_at => (@time)..(@time + 1.day) })
+		@day_users = User.count(:conditions => { :created_at => (@time)..(@time + 1.day) })
+	end
 
 end

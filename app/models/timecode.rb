@@ -17,21 +17,23 @@
 # You should have received a copy of the GNU General Public License
 # along with Ecafeserver.  If not, see <http://www.gnu.org/licenses/>.
 
-class Timecode < ActiveRecord::Base
-  has_one :sale
-  belongs_to :customer
-  has_one :client, :dependent => :destroy
+require 'digest/sha1'
 
-  def self.per_page
-    10
-  end
-  
+class Timecode < ActiveRecord::Base
+	has_one :sale
+	belongs_to :user
+	has_one :client, :dependent => :destroy
+
+	def self.per_page
+		10
+	end
+
 	def generate_code
-    # generate a random number between 0 and 9, to make sure the timecode starts with a number
-    initial_num = rand(9)
-    co = Digest::SHA1.hexdigest("--#{Time.now.to_s}--")[0,7]
+		# generate a random number between 0 and 9, to make sure the timecode starts with a number
+		initial_num = rand(9)
+		co = Digest::SHA1.hexdigest("--#{Time.now.to_s}--")[0,7]
 		self.code = initial_num.to_s() + co
-		# check that the generated code does not exist already !!!
+		# TODO: check that the generated code does not exist already !!!
 	end
 	
 	def self.new_from_model (model)
@@ -56,13 +58,13 @@ class Timecode < ActiveRecord::Base
 		return timecode
 	end
 
-  def is_valid?
-    if self.expiration < Time.now && self.expires == true # Timecode is expired
-      return false
-    end
-    if self.time <= 0 && self.unlimited == false # Timecode does not have any time left
-      return false
-    end
-    return true
-  end
+	def is_valid?
+		if self.expiration < Time.now && self.expires == true # Timecode is expired
+			return false
+		end
+		if self.time <= 0 && self.unlimited == false # Timecode does not have any time left
+			return false
+		end
+		return true
+	end
 end

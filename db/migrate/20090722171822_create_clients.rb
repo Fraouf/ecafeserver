@@ -26,7 +26,7 @@ class CreateClients < ActiveRecord::Migration
       t.string :session_id, :limit => 36, :primary => true
       t.string :state
       t.integer :timecode_id
-      t.integer :customer_id
+      t.integer :user_id
       t.datetime :last_request, :null => true
       t.timestamps
     end
