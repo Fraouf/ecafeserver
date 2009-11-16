@@ -20,8 +20,9 @@
 class Operation < ActiveRecord::Base
 	def self.add(type, controller, action, arguments)
 		user = ''
-		unless User.current.nil?
-			user = User.current.login
+		current_user_session = UserSession.find
+		unless current_user_session.nil?
+			user = current_user_session.record.login
 		end
 		operation = Operation.new(:user => user, :operation_type => type, :controller => controller, :action => action, :arguments => arguments)
 		operation.save

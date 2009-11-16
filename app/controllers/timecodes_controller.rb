@@ -51,30 +51,32 @@ class TimecodesController < ApplicationController
 		if @timecode
 			code = @timecode.code
 			user = @timecode.user
+			user_id = nil
 			unless user.nil?
 				if(user.is_admin? && current_user.is_employee?)
 					flash[:error] = t 'sessions.admin_required'
 					redirect_to :controller=> "users", :action => "show", :id => user.id
 					return
 				end
+				user_id = user.id
 			end
 			if current_user.is_admin? # The employee is an admin, he can delete whatever he wants
 				destroy_sale(@timecode) if @timecode.created_at == @timecode.updated_at
 				@timecode.destroy
-				destroy_success(code, user.id)
+				destroy_success(code, user_id)
 			else #The employee is a basic employee, he can delete timecodes that have never been used only
 				if @timecode.created_at == @timecode.updated_at
 					# Destroy sale associated with timecode
 					destroy_sale(@timecode)
 					@timecode.destroy
-					destroy_success(code, user.id)
+					destroy_success(code, user_id)
 				else
 					Operation.add("operations.administration", "operations.timecode", "operations.destroy", "operations.timecodes.destroy_failed, " + code)
 					flash[:error] = t 'timecodes.destroy_failed'
 					if (user.nil?)
 						redirect_to :controller => "timecodes", :action => "index"
 					else
-						redirect_to :controller => "users", :action => "show", :id => user.id
+						redirect_to :controller => "users", :action => "show", :id => user_id
 					end
 				end
 			end

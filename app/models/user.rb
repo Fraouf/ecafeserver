@@ -27,7 +27,10 @@ class User < ActiveRecord::Base
 	end
 	
 	def ldap_entry
-		LdapUser.find(self.login)
+		if @ldap_entry.nil?
+			@ldap_entry = LdapUser.find(self.login)
+		end
+		return @ldap_entry
 	end
 	
 	# Tries to find a User first by looking into the database and then by
@@ -67,15 +70,6 @@ class User < ActiveRecord::Base
 	# Returns true if the user is an admin
 	def is_admin?
 		return ldap_entry.is_member_of?("admins")
-	end
-	
-	def self.current
-		Thread.current[:user]
-	end
-
-	def self.current=(user)
-		raise(ArgumentError, "Invalid user. Expected an object of class 'User', got #{user.inspect}") unless user.is_a?(User)
-		Thread.current[:user] = user
 	end
 	
 	def time
@@ -127,8 +121,8 @@ class User < ActiveRecord::Base
 	
 	private
 	
-	# Returns the time that the customer has left
-	# Returns -1 if the customer has unlimited time left
+	# Returns the time that the user has left
+	# Returns -1 if the user has unlimited time left
 	def get_time
 		time = 0
 		unlimited = false
