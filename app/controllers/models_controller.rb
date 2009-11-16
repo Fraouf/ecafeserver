@@ -19,6 +19,7 @@
 
 class ModelsController < ApplicationController
 
+	before_filter :employee_required
 	before_filter :admin_required, :except => [:index]
 	
 	def index

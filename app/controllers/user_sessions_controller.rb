@@ -18,6 +18,8 @@
 # along with Ecafeserver.  If not, see <http://www.gnu.org/licenses/>.
 
 class UserSessionsController < ApplicationController
+	before_filter :require_no_user, :except => [:destroy]
+	
 	def new
 		@user_session = UserSession.new()
 	end
@@ -26,7 +28,7 @@ class UserSessionsController < ApplicationController
 		@user_session = UserSession.new(params[:user_session])
 		if @user_session.save
 			flash[:notice] = t 'sessions.login_successful'
-			redirect_to :controller => 'pages', :action => 'index'
+			redirect_back_or_default url_for(:controller => "pages", :action => "index")
 		else
 			flash[:error] = t('sessions.login_failed')
 			render :action => 'new'

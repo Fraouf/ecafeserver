@@ -33,21 +33,40 @@ class User < ActiveRecord::Base
 	# Tries to find a User first by looking into the database and then by
 	# creating a User if there's an LDAP entry for the given login
 	def self.find_or_create_from_ldap(login)
-		find_by_login(login) || create_from_ldap_if_valid(login)
+		user_entry = find_by_login(login)
+		if user_entry == nil
+			user_entry = create_from_ldap_if_valid(login)
+		end
+		unless user_entry == nil
+			# Test if user is an admin or an employee
+			unless user_entry.is_admin? || user_entry.is_employee?
+				return nil
+			else
+				return user_entry
+			end
+		else
+			return user_entry
+		end
 	end
 
 	# Creates a User record in the database if there is an entry in the LDAP
 	# with the given login
 	def self.create_from_ldap_if_valid(login)
 		begin
-		User.create(:login => login) if LdapUser.find(login)
+			User.create(:login => login) if LdapUser.find(login)
 		rescue ActiveLdap::EntryNotFound
-		nil # Don't do anything since we can't find an entry
+			nil # Don't do anything since we can't find an entry
 		end
 	end
 	
-	def is_admin
-		return ldap_entry.is_admin
+	# Returns true if the user is an employee
+	def is_employee?
+		return ldap_entry.is_member_of?("employees")
+	end
+	
+	# Returns true if the user is an admin
+	def is_admin?
+		return ldap_entry.is_member_of?("admins")
 	end
 	
 	def self.current

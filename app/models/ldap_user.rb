@@ -53,11 +53,17 @@ class LdapUser < ActiveLdap::Base
 		false
 	end
 
-	def is_admin
-		return true
-	end
-
 	def group
 		return self.groups[0].cn
+	end
+	
+	# Returns true if the user is a member of group_name
+	def is_member_of?(group_name)
+		self.groups.each do |group|
+			if group.cn == group_name
+				return true
+			end
+		end
+		return false
 	end
 end

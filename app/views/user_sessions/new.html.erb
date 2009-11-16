@@ -1,10 +1,10 @@
 <h1><%= t 'login' %></h1>
 
 <% form_for @user_session do |f| %>
-<p><%= f.label :login %><br />
+<p><%= label_tag 'login', I18n.t('username') %><br />
 <%= f.text_field :login %></p>
 
-<p><%= f.label :password %><br/>
+<p><%= label_tag 'password', I18n.t('password') %><br/>
 <%= f.password_field :password %></p>
 
 <!-- Uncomment this if you want this functionality

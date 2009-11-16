@@ -1,4 +1,4 @@
-<h1><%= t 'users.edit_header' %></h1>
+<h1><%= t 'users.edit' %></h1>
 
 <%= error_messages_for :user, :header_message => I18n.t('users.edit_failed') %>
 <% form_for :user, @user.ldap_entry, :url => { :action => "update" }, :html => { :method => :put } do |f| -%>
