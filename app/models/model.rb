@@ -18,6 +18,8 @@
 # along with Ecafeserver.  If not, see <http://www.gnu.org/licenses/>.
 
 class Model < ActiveRecord::Base
+	has_one :group
+	
 	validates_presence_of :title, :message => :model_title_presence
 	validates_length_of   :title, :within => 3..100, :message => :model_title_length
 	validates_uniqueness_of	:title, :message => :model_title_uniqueness

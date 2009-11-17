@@ -1,0 +1,24 @@
+<h1><%= t 'groups.add_new' %></h1>
+
+<%= error_messages_for :group, :header_message => I18n.t('groups.add_failed') %>
+<% form_for :group, :url => groups_path do |f| -%>
+<p><%= label_tag 'name', I18n.t('groups.name') %><br/>
+<%= f.text_field :name %></p>
+
+<p><%= label_tag 'description', I18n.t('description') %><br />
+<%= text_field_tag :description %></p>
+
+<p><%= label_tag 'price', I18n.t('groups.price') %><br />
+<%= f.text_field :price %></p>
+
+<p><%= label_tag 'storage', I18n.t('groups.storage') %><br/>
+<%= f.text_field :storage %></p>
+
+<p><%= check_box_tag(:model_active) %>
+<%= label_tag :model_active, I18n.t('groups.model_active') %></p>
+
+<p><%= label_tag 'model', I18n.t('groups.model') %><br />
+<%= collection_select (:group, :model_id, @models, :id, :title) %></p>
+
+<p><%= submit_tag t 'add' %></p>
+<% end -%>

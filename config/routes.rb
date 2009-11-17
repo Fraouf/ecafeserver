@@ -4,8 +4,8 @@ ActionController::Routing::Routes.draw do |map|
   #map.register '/register', :controller => 'employees', :action => 'create'
   #map.signup '/signup', :controller => 'employees', :action => 'new'
   map.resources :users, :collection => { :edit_profile => :get, :update_profile => :post }
-  map.resources :models, :timecodes, :sales, :operations, :customers, :clients, :user_sessions
-  map.resource :session, :configuration
+  map.resources :models, :timecodes, :sales, :operations, :clients, :user_sessions, :groups
+  map.resource :configuration
 
   map.connects '/clients/:action', :controller => 'clients'
   map.connects '/users/:action/:id', :controller => 'users'

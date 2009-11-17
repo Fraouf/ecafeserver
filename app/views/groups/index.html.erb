@@ -1,0 +1,19 @@
+<h1><%= t 'groups.groups' %></h1>
+<table id="groups">
+	<tr>
+		<th><%= t 'groups.name' %></th>
+		<th><%= t 'description' %></th>
+		<th class="nobg"></th>
+	</tr>
+	<% @groups.each do |group| %>
+	<tr>
+		<td><%= group.name %></td>
+		<td><%= group.ldap_entry.description %></td>
+		<td><%= link_to I18n.t('show'), group_path(group) %></td>
+	</tr>
+	<% end %>
+</table>
+<br />
+<div style="text-align: right;">
+	<%= link_to I18n.t('groups.add_new'), :controller => "groups", :action => "new" %>
+</div>

@@ -22,6 +22,7 @@
 		<li><%= link_to t('index'), {:controller => "pages", :action => "index"} %></li>
 		<li><%= link_to t('timecodes.timecodes'), {:controller => "timecodes", :action => "index"} %></li>
         <li><%= link_to t('users.users'), {:controller => "users", :action => "index"} %></li>
+        <li><%= link_to t('groups.groups'), {:controller => "groups", :action => "index"} %></li>
         <li><%= link_to t('models.models'), {:controller => "models", :action => "index"} %></li>
         <li><%= link_to t('statistics'), {:controller => "statistics", :action => "index"}  %></li>
 		<% if is_admin? %>

@@ -17,14 +17,18 @@
 # You should have received a copy of the GNU General Public License
 # along with Ecafeserver.  If not, see <http://www.gnu.org/licenses/>.
 
-class CreateConfigurations < ActiveRecord::Migration
-  def self.up
-    create_table :configurations do |t|
-      t.timestamps
-    end
-  end
+class CreateGroups < ActiveRecord::Migration
+	def self.up
+		create_table :groups do |t|
+			t.string :name, :null => false
+			t.integer :price
+			t.integer :storage
+			t.integer :model_id
+			t.timestamps
+		end
+	end
 
-  def self.down
-    drop_table :configurations
-  end
+	def self.down
+		drop_table :groups
+	end
 end

@@ -30,11 +30,9 @@ class UsersController < ApplicationController
 	
 	def new
 		@user = LdapUser.new
-		@groups = LdapGroup.find :all
-			
+		@groups = LdapGroup.find :all		
 	end
 	
-	# TODO: an employee must not be able to create an admin
 	def create
 		# DB user
 		@db_user = User.new

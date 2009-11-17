@@ -38,4 +38,23 @@ function model_expiration_time () {
     }
 }
 
+function model_active() {
+	if($("model_active") && $("group_model_id")) {
+		if($("model_active").checked) {
+			$("group_model_id").disabled = false;
+		} else {
+			$("group_model_id").disabled = true;
+		}
+		$("model_active").observe("click", function() {
+			if($("model_active").checked) {
+				$("group_model_id").disabled = false;
+			} else {
+				$("group_model_id").disabled = true;
+				$("group_model_id").value = 0;
+			}
+		})
+	}
+}
+
 Event.observe(window, 'load', model_expiration_time);
+Event.observe(window, 'load', model_active);

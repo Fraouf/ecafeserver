@@ -17,14 +17,14 @@
 # You should have received a copy of the GNU General Public License
 # along with Ecafeserver.  If not, see <http://www.gnu.org/licenses/>.
 
-class CreateConfigurations < ActiveRecord::Migration
-  def self.up
-    create_table :configurations do |t|
-      t.timestamps
-    end
-  end
-
-  def self.down
-    drop_table :configurations
-  end
+class Group < ActiveRecord::Base
+	belongs_to :model
+	
+	def ldap_entry
+		if @ldap_entry.nil?
+			@ldap_entry = LdapGroup.find(self.name)
+		end
+		return @ldap_entry
+	end
+	
 end

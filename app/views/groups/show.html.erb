@@ -1,0 +1,21 @@
+<h1><%= @group.name %></h1>
+
+<p><span style="font-weight: bold;"><%= I18n.t('description') %></span><br />
+<%= @group.ldap_entry.description %></p>
+
+<p><span style="font-weight: bold;"><%= I18n.t('groups.price') %></span><br />
+<%= @group.price%></p>
+
+<p><span style="font-weight: bold;"><%= I18n.t('groups.storage') %></span><br />
+<%= @group.storage %></p>
+
+<% unless @group.model.nil? %>
+	<p><span style="font-weight: bold;"><%=  I18n.t('model') %></span><br />
+	<%= @group.model.title %></p>
+<% end %>
+
+<br />
+<p><%= link_to I18n.t('edit'), edit_group_path(@group) %> -
+<% form_tag group_path(@group), :method => :delete do %>
+  <%= submit_tag(I18n.t('delete'), :confirm => I18n.t('groups.confirm_delete')) %>
+<% end %></p>
