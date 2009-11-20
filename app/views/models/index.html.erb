@@ -5,30 +5,32 @@
 		<th><%= t 'models.price' %></th>
 		<th><%= t 'models.expiration' %></th>
 		<th><%= t 'models.time' %></th>
+		<th><%= t 'models.renew' %></th>
 		<% if is_admin? %>
-                  <th class="nobg"></th>
-                 <% end %>
+			<th class="nobg"></th>
+		<% end %>
 	</tr>
 	<% @models.each do |model| %>
 	<tr>
 		<td><%= model.title %></td>
 		<td><%= model.price %></td>
 		<td><% if model.expiration > 0 %>
-		<%= model.expiration %>
+			<%= model.expiration %>
 		<% elsif model.expiration == 0 %>
-		<%= t 'never' %>
+			<%= t 'never' %>
 		<% end %></td>
 		<td><% if model.time > 0 %>
-		<%= model.time %>
+			<%= model.time %>
 		<% elsif model.time == 0 %>
-		<%= t 'unlimited' %>
+			<%= t 'unlimited' %>
 		<% end %></td>
-                <% if is_admin? %>
+		<td><%= model.renew %></td>
+		<% if is_admin? %>
 		<td><%= link_to I18n.t('edit'), edit_model_path(model) %> - 
 			<% form_tag model_path(model), :method => :delete do %>
 			<%= submit_tag t 'delete' %>
 			<% end %></td>
-                <% end %>
+				<% end %>
 	</tr>
 	<% end %>
 </table>

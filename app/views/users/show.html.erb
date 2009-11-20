@@ -21,6 +21,7 @@
 		<th><%= t 'timecode' %></th>
 		<th><%= t 'time_left' %></th>
 		<th><%= t 'timecodes.expiration_date' %></th>
+		<th><%= t 'models.renew' %></th>
 		<th class="nobg"></th>
 	</tr>
 	<% @user.timecodes.each do |timecode| %>
@@ -32,10 +33,11 @@
 		<%= timecode.time %>
 		<% end %></td>
 		<td><% if timecode.expires %>
-		<%= timecode.expiration %>
+		<%= I18n.l(timecode.expiration, :format => :default) %>
 		<% else %>
 		<%= t 'never' %>
 		<% end %></td>
+		<td><%= timecode.renew %></td>
 		<td><% if timecode.created_at == timecode.updated_at || current_employee.is_admin %>
 			<% form_tag timecode_path(timecode), :method => :delete do %>
 			<%= submit_tag t 'delete' %>

@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
 
 	has_many :timecodes, :dependent => :destroy
 	has_one  :client, :dependent => :destroy
+	has_one	 :sale
 
 	acts_as_authentic do |c|
 		c.validate_password_field = false

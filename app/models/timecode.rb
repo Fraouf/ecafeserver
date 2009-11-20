@@ -52,7 +52,8 @@ class Timecode < ActiveRecord::Base
 								:expiration => expiration,
 								:expires => expires,
 								:time => model.time,
-								:unlimited => unlimited)
+								:unlimited => unlimited,
+								:renew => model.renew)
 		timecode.generate_code
 		logger.debug "#{timecode.inspect}"
 		return timecode

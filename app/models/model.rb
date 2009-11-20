@@ -33,11 +33,15 @@ class Model < ActiveRecord::Base
 	validates_presence_of :time, :message => :model_time_presence
 	validates_numericality_of :time, :only_integer => true, :greater_than_or_equal_to => 0, :message => :model_time_numericality
 	
+	validates_presence_of :renew, :message => :model_renew_presence
+	validates_numericality_of :renew, :only_integer => true, :greater_than_or_equal_to => 0, :message => :model_renew_numericality
+	
 	HUMAN_ATTRIBUTES = {
 		:title	=>	"",
 		:price	=>	"",
 		:expiration	=>	"",
-		:time	=> ""
+		:time	=> "",
+		:renew => ""
 	}
 	
 	def self.human_attribute_name(attr)

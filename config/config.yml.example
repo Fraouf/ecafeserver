@@ -3,12 +3,18 @@
 # user home directories are stored. Make sure the partition is set
 # correctly, otherwise the quota system will not work
 
+# qpartition defines the partition where the user home directories are stored
+# block_size defines the size of the block in bytes in this partition (used to calculate user quotas)
+
 production: 
   language: en-US
   qpartition: /dev/sda1
+  block_size: 1024
 development: 
   language: fr-FR
   qpartition: /dev/sda1
+  block_size: 1024
 test: 
   language: en-US
   qpartition: /dev/sda1
+  block_size: 1024

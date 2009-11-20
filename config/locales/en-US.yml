@@ -61,6 +61,8 @@
     edit_successful: "The model was edited successfully"
     never_expires: "Check this if you want this model to never expire"
     unlimited: "Check this if you want this model to have unlimited time"
+    renew: "Renewability (in days)"
+    no_renew: "Check this if you don't want this model to be renewed"
   timecodes:
     timecodes: "Timecodes"
     expiration_date: "Date of expiration"
@@ -300,3 +302,5 @@
         model_expiration_numericality: "The expiration time must be a valid integer"
         model_time_presence: "Please provide a time of expiration (in minutes)"
         model_time_numericality: "The time must be a valid integer"
+        model_renew_presence: "You must specify the renewability of the model"
+        model_renew_numericality: "The number of days before renewal must be a number >= 0"

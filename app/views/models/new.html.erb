@@ -17,6 +17,11 @@
 <%= f.text_field 'time' %><br />
 <%= check_box_tag(:unlimited) %>
   <%= label_tag :unlimited, I18n.t('models.unlimited') %></p>
+  
+<p><%= label_tag 'renew', I18n.t('models.renew') %><br />
+<%= f.text_field 'renew' %><br />
+<%= check_box_tag(:no_renew) %>
+  <%= label_tag :no_renew, I18n.t('models.no_renew') %></p>
 
 <p><%= submit_tag t 'add' %></p>
 <% end -%>

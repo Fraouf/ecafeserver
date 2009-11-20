@@ -22,6 +22,7 @@ class CreateSales < ActiveRecord::Migration
     create_table :sales do |t|
       t.integer :amount
       t.references :timecode
+      t.references :user
       t.timestamps
     end
   end

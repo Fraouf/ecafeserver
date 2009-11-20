@@ -18,19 +18,20 @@
 # along with Ecafeserver.  If not, see <http://www.gnu.org/licenses/>.
 
 class CreateTimecodes < ActiveRecord::Migration
-  def self.up
-    create_table :timecodes do |t|
+def self.up
+	create_table :timecodes do |t|
 		t.integer :price
 		t.datetime :expiration
 		t.boolean :expires
 		t.integer :time
 		t.boolean :unlimited
 		t.string :code
-      t.timestamps
-    end
-  end
+		t.integer :renew
+		t.timestamps
+	end
+end
 
-  def self.down
-    drop_table :timecodes
-  end
+def self.down
+	drop_table :timecodes
+end
 end

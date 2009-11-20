@@ -62,6 +62,8 @@
     edit_successful: "Le modèle a bien été modifié"
     never_expires: "Cochez cette case pour que ce modèle n'expire jamais"
     unlimited: "Cochez cette case pour donner un temps illimité à ce modèle"
+    renew: "Renouvelabilité (en jours)"
+    no_renew: "Cochez cette case si vous souhaitez que le modèle ne se renouvele pas"
   timecodes:
     timecodes: "Code-temps"
     expiration_date: "Date d'expiration"
@@ -274,3 +276,5 @@
         model_expiration_numericality: "Le nombre de jours d'expiration doit être un nombre entier valide"
         model_time_presence: "Veuillez indiquer un temps d'expiration (en minutes)"
         model_time_numericality: "Le temps doit être un nombre entier valide"
+        model_renew_presence: "La renouvelabilité du modèle doit être spécifiée"
+        model_renew_numericality: "Le nombre de jours avant renouvellement doit être un entier >= 0"

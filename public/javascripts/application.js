@@ -28,11 +28,27 @@ function model_expiration_time () {
             }
         })
     }
+    
+    if($("model_renew") && $("no_renew")) {
+        if($("model_renew").value == "0") {
+            $("no_renew").checked = true;
+            $("model_renew").disabled = true;
+        }
+        $("no_renew").observe("click", function() {
+            if($("no_renew").checked) {
+                $("model_renew").value = 0;
+                $("model_renew").disabled = true;
+            } else {
+                $("model_renew").disabled = false;
+            }
+        })
+    }
 
     if($("model")) {
         $("model").observe("submit", function() {
             $("model_time").disabled = false;
             $("model_expiration").disabled = false;
+            $("model_renew").disabled = false;
             
         })
     }

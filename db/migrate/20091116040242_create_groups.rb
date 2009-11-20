@@ -23,9 +23,11 @@ class CreateGroups < ActiveRecord::Migration
 			t.string :name, :null => false
 			t.integer :price
 			t.integer :storage
-			t.integer :model_id
+			t.references :model
 			t.timestamps
 		end
+		Group.create :name => "admins", :price => 0, :storage => 0
+		Group.create :name => "employees", :price => 0, :storage => 0
 	end
 
 	def self.down

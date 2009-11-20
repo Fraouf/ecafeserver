@@ -30,7 +30,7 @@ class UsersController < ApplicationController
 	
 	def new
 		@user = LdapUser.new
-		@groups = LdapGroup.find :all		
+		@groups = Group.find :all		
 	end
 	
 	def create
@@ -39,19 +39,35 @@ class UsersController < ApplicationController
 		@db_user.login = params[:user][:uid]
 		# LDAP user
 		@user = LdapUser.new(params[:user])
-		@group = LdapGroup.find(params[:group])
-		@groups = LdapGroup.find :all
+		@db_group = Group.find(params[:group])
+		@group = @db_group.ldap_entry
+		@groups = Group.find :all
 		if authorize_employee(@group.cn, 'new')
 			@user.gid_number = @group.gidNumber
 			@user.cn = @user.givenName + ' ' + @user.sn
 			@user.uid_number = get_ldap_uid()
 			@user.home_directory = "/home/" + params[:user][:uid]
 			@user.loginShell = "/bin/bash"
-			# Unlimited quotas for employees
-			@user.quota = APP_CONFIG['qpartition'] + ":0:0:0:0"
+			if @db_group.name == "admins" || @db_group.name == "employees"
+				# Unlimited quotas for admins and employees
+				@user.quota = APP_CONFIG['qpartition'] + ":0:0:0:0"
+			else
+				soft_limit = @db_group.storage * 1024 * 1024 * APP_CONFIG['block_size']
+				hard_limit = (@db_group.storage + 50) * 1024 * 1024 * APP_CONFIG['block_size']
+				@user.quota = APP_CONFIG['qpartition'] + ":" + soft_limit.to_s() + ":" + hard_limit.to_s() + ":0:0"
+			end
 			if @user.save && @db_user.save
 				@group.members << @user
 				if @user.errors.empty?
+					if @db_group.model
+						@timecode = Timecode.new_from_model(@db_group.model)
+						@timecode.user = @db_user
+						@timecode.save
+					end
+					unless @db_user.is_admin? || @db_user.is_employee?
+						sale = Sale.new(:amount => @db_group.price, :user_id => @db_user.id)
+						sale.save
+					end
 					redirect_to :controller => "users", :action => "index"
 					flash[:notice] = t 'users.added_successfully'
 				else

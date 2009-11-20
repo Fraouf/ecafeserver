@@ -6,12 +6,14 @@
 <table>
   <tr>
     <th><%= t 'timecode' %></th>
+    <th><%= t 'user' %></th>
     <th><%= t 'amount' %></th>
     <th><%= t 'date_string' %></th>
   </tr>
   <% @sales.each do |sale| %>
   <tr>
     <td><% if !sale.timecode.nil? %> <%= sale.timecode.code %><% end %> </td>
+    <td><% if !sale.user.nil? %> <%= sale.user.login %><% end %> </td>
     <td><%= sale.amount %></td>
     <td><%= I18n.l(sale.created_at) %></td>
   </tr>

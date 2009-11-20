@@ -19,6 +19,7 @@
 
 class Sale < ActiveRecord::Base
 	belongs_to :timecode
+	belongs_to :user
 
 	def self.per_page
 		30
