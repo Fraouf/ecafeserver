@@ -5,3 +5,28 @@
 #
 # two:
 #   column: value
+
+admin:
+  id: 1
+  login: admin
+  persistence_token: f4fb8dc0538dc51b2ffaf5618a0dffdb3a9d5ee19514a45b43b071504ce8b7f2a76316cb9d81efc84de6ece819fc7ad3c0431f8bb9504ddd4804bb81bae5aeb5
+  
+employee:
+  id: 2
+  login: employee
+  persistence_token: 123456
+  
+no_time_left:
+  id: 3
+  login: no_time_left
+  persistence_token: 654321
+
+unlimited_time:
+  id: 4
+  login: unlimited_time
+  persistence_token: abcdefgh
+  
+time_left:
+  id: 5
+  login: time_left
+  persistence_token: hfedcba

@@ -20,11 +20,11 @@
 class CreateModels < ActiveRecord::Migration
 def self.up
 	create_table :models do |t|
-		t.string :title
-		t.integer :price
-		t.integer :expiration
-		t.integer :time
-		t.integer :renew
+		t.string :title, :null => false
+		t.integer :price, :null => false
+		t.integer :expiration, :null => false
+		t.integer :time, :null => false
+		t.integer :renew, :null => false
 		t.timestamps
 	end
 end

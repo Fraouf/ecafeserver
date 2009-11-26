@@ -5,3 +5,10 @@
 #
 # two:
 #   column: value
+
+one_hour:
+  title: ONEHOUR
+  price: 30
+  expiration: 30
+  time: 60
+  renew: 0

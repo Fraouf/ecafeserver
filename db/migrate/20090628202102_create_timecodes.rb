@@ -22,13 +22,15 @@ def self.up
 	create_table :timecodes do |t|
 		t.integer :price
 		t.datetime :expiration
-		t.boolean :expires
+		t.boolean :expires, :default => true
 		t.integer :time
-		t.boolean :unlimited
-		t.string :code
-		t.integer :renew
+		t.boolean :unlimited, :default => false
+		t.string :code, :null => false
+		t.integer :renew, :default => 0
 		t.timestamps
 	end
+	
+	add_index :timecodes, :code, { :unique => true }
 end
 
 def self.down

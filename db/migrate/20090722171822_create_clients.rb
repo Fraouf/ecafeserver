@@ -20,13 +20,13 @@
 class CreateClients < ActiveRecord::Migration
   def self.up
     create_table :clients, :id => false do |t|
-      t.string :ip_address, :limit => 40
-      t.integer :port
-      t.string :hostname
+      t.string :ip_address, :limit => 40, :null => false
+      t.integer :port, :null => false
+      t.string :hostname, :null => false
       t.string :session_id, :limit => 36, :primary => true
       t.string :state
-      t.integer :timecode_id
-      t.integer :user_id
+      t.references :timecode, :null => true
+      t.references :user, :null => true
       t.datetime :last_request, :null => true
       t.timestamps
     end

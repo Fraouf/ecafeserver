@@ -5,3 +5,8 @@
 #
 # two:
 #   column: value
+
+students:
+  name: students
+  price: 0
+  storage: 50

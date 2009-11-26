@@ -122,7 +122,7 @@ class ClientsController < ApplicationController
 						raise XMLRPC::FaultException.new(-5, "Password invalid")
 						Operation.add(operation_type, operation_controller, operation_action, "operations.users.connection_password_invalid, " + login)
 					else
-						if @user.time == 0
+						if !@user.is_admin? && !@user.is_employee? && @user.time == 0
 							raise XMLRPC::FaultException.new(-6, "No time left")
 							Operation.add(operation_type, operation_controller, operation_action, "operations.users.connection_no_time_left, " + login)
 						else

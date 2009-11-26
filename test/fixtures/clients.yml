@@ -21,10 +21,10 @@
     state: connected
     timecode_id: 1
 
-  customer:
+  user:
     ip_address: 192.168.1.4
     hostname: customer
     port: 65534
     session_id: a40191f2-76f7-11de-9464-00247e13e797
     state: connected
-    customer_id: 1
+    user_id: 1

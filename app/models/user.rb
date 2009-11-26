@@ -19,12 +19,16 @@
 
 class User < ActiveRecord::Base
 
+	ADMINS_GROUP_NAME = 'admins'
+	EMPLOYEES_GROUP_NAME = 'employees'
+	
 	has_many :timecodes, :dependent => :destroy
 	has_one  :client, :dependent => :destroy
 	has_one	 :sale
 
 	acts_as_authentic do |c|
 		c.validate_password_field = false
+		c.validates_format_of_login_field_options :with => /\A[a-zA-Z0-9]+\z/
 	end
 	
 	def ldap_entry
@@ -65,12 +69,12 @@ class User < ActiveRecord::Base
 	
 	# Returns true if the user is an employee
 	def is_employee?
-		return ldap_entry.is_member_of?("employees")
+		return ldap_entry.is_member_of?(User::EMPLOYEES_GROUP_NAME)
 	end
 	
 	# Returns true if the user is an admin
 	def is_admin?
-		return ldap_entry.is_member_of?("admins")
+		return ldap_entry.is_member_of?(User::ADMINS_GROUP_NAME)
 	end
 	
 	def time

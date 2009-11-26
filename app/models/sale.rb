@@ -20,6 +20,9 @@
 class Sale < ActiveRecord::Base
 	belongs_to :timecode
 	belongs_to :user
+	
+	validates_presence_of :amount
+	validates_numericality_of :amount, :only_integers => true, :greater_than_or_equal_to => 0
 
 	def self.per_page
 		30

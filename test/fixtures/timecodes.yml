@@ -9,37 +9,66 @@
   onehour:
     id: 1
     price: 50
-    expiration: 2009-08-21 14:35:28
+    expiration: 2010-08-21 14:35:28
     expires: false
     time: 60
     unlimited: false
     code: 578f9956
 
-  belongs_to_customer:
+  belongs_to_user:
     id: 2
     price: 50
-    expiration: 2009-08-21 14:35:28
+    expiration: 2010-08-21 14:35:28
     expires: false
     time: 0
     unlimited: true
     code: 578f9957
-    customer_id: 2
+    user_id: 2
 
-  invalid:
+  no_time_left:
     id: 3
     price: 50
-    expiration: 2009-08-21 14:35:28
+    expiration: 2010-08-21 14:35:28
     expires: false
     time: 0
     unlimited: false
     code: 578f9958
-    customer_id: 2
 
-  unlimited:
+  expired:
     id: 4
     price: 50
-    expiration: 2009-08-21 14:35:28
+    expiration: 2008-08-21 14:35:28
+    expires: true
+    time: 30
+    unlimited: false
+    code: 578f9959
+
+  unlimited:
+    id: 5
+    price: 50
+    expiration: 2010-08-21 14:35:28
     expires: false
     time: 60
     unlimited: true
-    code: 578f9959
+    code: 578f9960
+    
+  unlimited_belongs_to_user:
+    id: 6
+    price: 50
+    expiration: 2010-08-21 14:35:28
+    expires: false
+    time: 0
+    unlimited: true
+    code: 578f9961
+    user_id: 4
+  
+  onehour_belongs_to_user:
+    id: 7
+    price: 50
+    expiration: 2010-08-21 14:35:28
+    expires: false
+    time: 60
+    unlimited: false
+    code: 578f9962
+    user_id: 5
+    

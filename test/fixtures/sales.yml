@@ -5,3 +5,7 @@
 #
 # two:
 #   column: value
+
+sale1:
+  amount: 50
+  timecode_id: 1

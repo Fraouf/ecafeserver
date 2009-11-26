@@ -23,6 +23,9 @@ class Timecode < ActiveRecord::Base
 	has_one :sale
 	belongs_to :user
 	has_one :client, :dependent => :destroy
+	
+	validates_uniqueness_of :code
+	validates_presence_of :code
 
 	def self.per_page
 		10
@@ -33,7 +36,10 @@ class Timecode < ActiveRecord::Base
 		initial_num = rand(9)
 		co = Digest::SHA1.hexdigest("--#{Time.now.to_s}--")[0,7]
 		self.code = initial_num.to_s() + co
-		# TODO: check that the generated code does not exist already !!!
+		# Make sure the generated code does not exist already and generate a new one if needed
+		while (!self.valid?)
+			self.generate_code
+		end
 	end
 	
 	def self.new_from_model (model)

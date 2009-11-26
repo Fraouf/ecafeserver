@@ -21,11 +21,12 @@ class CreateGroups < ActiveRecord::Migration
 	def self.up
 		create_table :groups do |t|
 			t.string :name, :null => false
-			t.integer :price
-			t.integer :storage
-			t.references :model
+			t.integer :price, :null => false
+			t.integer :storage, :null => false
+			t.references :model, :null => true
 			t.timestamps
 		end
+		add_index :groups, :name, :unique => true
 		Group.create :name => "admins", :price => 0, :storage => 0
 		Group.create :name => "employees", :price => 0, :storage => 0
 	end

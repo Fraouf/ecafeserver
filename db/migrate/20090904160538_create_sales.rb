@@ -18,16 +18,16 @@
 # along with Ecafeserver.  If not, see <http://www.gnu.org/licenses/>.
 
 class CreateSales < ActiveRecord::Migration
-  def self.up
-    create_table :sales do |t|
-      t.integer :amount
-      t.references :timecode
-      t.references :user
-      t.timestamps
-    end
-  end
+	def self.up
+		create_table :sales do |t|
+			t.integer :amount
+			t.references :timecode
+			t.references :user
+			t.timestamps
+		end
+	end
 
-  def self.down
-    drop_table :sales
-  end
+	def self.down
+		drop_table :sales
+	end
 end

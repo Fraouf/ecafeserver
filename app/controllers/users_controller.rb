@@ -48,7 +48,7 @@ class UsersController < ApplicationController
 			@user.uid_number = get_ldap_uid()
 			@user.home_directory = "/home/" + params[:user][:uid]
 			@user.loginShell = "/bin/bash"
-			if @db_group.name == "admins" || @db_group.name == "employees"
+			if @db_group.name == User::ADMINS_GROUP_NAME || @db_group.name == User::EMPLOYEES_GROUP_NAME
 				# Unlimited quotas for admins and employees
 				@user.quota = APP_CONFIG['qpartition'] + ":0:0:0:0"
 			else
@@ -169,7 +169,7 @@ class UsersController < ApplicationController
 	private
 	
 	def authorize_employee(user_group, action)
-		if(user_group == "admins" && current_user.is_employee?)
+		if(user_group == User::ADMINS_GROUP_NAME && current_user.is_employee?)
 			flash[:error] = t 'sessions.admin_required'
 			render :action => action
 			return false

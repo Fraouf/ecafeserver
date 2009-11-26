@@ -26,8 +26,13 @@ class Client < ActiveRecord::Base
   belongs_to :timecode
 
   validates_presence_of :ip_address
-  validates_presence_of :hostname
+  validates_uniqueness_of :ip_address
   validates_presence_of :port
+  validates_numericality_of :port, :only_integer => true, :greater_than => 0
+  validates_presence_of :hostname
+  validates_presence_of :state
+  validates_inclusion_of :state, :in => %w(available connected)
+  validates_presence_of :session_id
 
   aasm_column :state
   aasm_initial_state :available
