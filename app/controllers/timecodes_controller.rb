@@ -43,6 +43,9 @@ class TimecodesController < ApplicationController
 				flash[:error] = t 'timecodes.add_failed'
 				redirect_to :controller => "timecodes", :action => "index"
 			end
+		else
+			flash[:error] = t 'timecodes.add_failed'
+			redirect_to :controller => "timecodes", :action => "index"
 		end
 	end
 	

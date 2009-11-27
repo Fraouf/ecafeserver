@@ -35,7 +35,11 @@ class ClientTest < ActiveSupport::TestCase
 		assert client.errors.invalid?(:ip_address)
 		assert client.errors.invalid?(:port)
 		assert client.errors.invalid?(:hostname)
-		assert client.errors.invalid?(:session_id)
+	end
+	
+	def test_valid
+		client = Client.new(:ip_address => "127.0.0.1", :port => 65536, :hostname => "test")
+		assert client.valid?
 	end
 	
 	def test_port_greater_than_0

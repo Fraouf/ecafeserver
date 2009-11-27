@@ -72,3 +72,13 @@
     code: 578f9962
     user_id: 5
     
+  can_not_be_destroyed_by_employee:
+    price: 50
+    expiration: 2010-08-21 14:35:28
+    expires: false
+    time: 60
+    unlimited: false
+    code: 578f9963
+    created_at: 2008-08-21 14:35:28
+    updated_at: 2008-08-23 14:35:28
+    

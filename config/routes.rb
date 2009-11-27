@@ -1,14 +1,12 @@
 ActionController::Routing::Routes.draw do |map|
   map.root :controller => 'user_sessions', :action => 'new'
   map.logout '/logout', :controller => 'user_sessions', :action => 'destroy'
-  #map.register '/register', :controller => 'employees', :action => 'create'
-  #map.signup '/signup', :controller => 'employees', :action => 'new'
   map.resources :users, :collection => { :edit_profile => :get, :update_profile => :post }
-  map.resources :models, :timecodes, :sales, :operations, :clients, :user_sessions, :groups
+  map.resources :models, :timecodes, :sales, :operations, :user_sessions, :groups
   map.resource :configuration
 
-  map.connects '/clients/:action', :controller => 'clients'
-  map.connects '/users/:action/:id', :controller => 'users'
+  map.connect '/clients/:action', :controller => 'clients'
+  #map.connect '/users/:action/:id', :controller => 'users'
   
   map.connect '/pages/:action.:format', :controller => 'pages'
   map.connect '/statistics/:action.:format', :controller => 'statistics'

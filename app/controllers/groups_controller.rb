@@ -69,6 +69,7 @@ class GroupsController < ApplicationController
 			redirect_to :controller => "groups", :action => "edit", :id => params[:id]
 			flash[:notice] = t 'groups.edit_successful'
 		else
+			@models = Model.find :all
 			render :action => 'edit', :id => params[:id]
 		end
 	end

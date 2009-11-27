@@ -19,11 +19,11 @@
 
 class ClientsController < ApplicationController
 
-	layout nil
+	#layout nil
 
-	wsdl_service_name 'Clients'
-	web_service_api ClientsApi
-	web_service_scaffold :invocation if Rails.env == 'development'
+	#wsdl_service_name 'Clients'
+	#web_service_api ClientsApi
+	#web_service_scaffold :invocation if Rails.env == 'development'
 
 	def register(port, hostname)
 		ip_address = determine_ip(request)

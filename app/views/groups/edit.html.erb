@@ -23,7 +23,7 @@ end %>
 <%= label_tag :model_active, I18n.t('groups.model_active') %></p>
 
 <p><%= label_tag 'model', I18n.t('groups.model') %><br />
-<%= collection_select (:group, :model_id, @models, :id, :title) %></p>
+<%= collection_select(:group, :model_id, @models, :id, :title) %></p>
 
 <p><%= submit_tag t 'edit' %></p>
 <% end -%>

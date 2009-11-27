@@ -25,7 +25,7 @@
 		<% else %>
 		<%= t 'never' %>
 		<% end %></td>
-		<td><% if timecode.created_at == timecode.updated_at || current_employee.is_admin %>
+		<td><% if timecode.created_at == timecode.updated_at || is_admin? %>
 			<% form_tag timecode_path(timecode), :method => :delete do %>
 			<%= submit_tag t 'delete' %>
 			<% end %>
