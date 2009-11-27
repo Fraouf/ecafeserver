@@ -12,3 +12,11 @@ one_hour:
   expiration: 30
   time: 60
   renew: 0
+  
+thirty_minutes_per_month:
+  title: 30MINUTESPERMONTH
+  price: 120
+  expiration: 365
+  time: 30
+  renew: 30
+

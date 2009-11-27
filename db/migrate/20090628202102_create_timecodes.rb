@@ -27,6 +27,8 @@ def self.up
 		t.boolean :unlimited, :default => false
 		t.string :code, :null => false
 		t.integer :renew, :default => 0
+		t.date :next_renew, :null => true
+		t.integer :time_to_renew, :default => 0
 		t.timestamps
 	end
 	

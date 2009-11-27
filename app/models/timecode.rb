@@ -69,7 +69,7 @@ class Timecode < ActiveRecord::Base
 		if self.expiration < Time.now && self.expires == true # Timecode is expired
 			return false
 		end
-		if self.time <= 0 && self.unlimited == false # Timecode does not have any time left
+		if self.time <= 0 && self.unlimited == false && self.renew == 0 # Timecode does not have any time left and can not be renewed
 			return false
 		end
 		return true

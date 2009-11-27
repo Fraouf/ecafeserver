@@ -18,6 +18,15 @@
 # along with Ecafeserver.  If not, see <http://www.gnu.org/licenses/>.
 
 class TimecodeObserver < ActiveRecord::Observer
+	
+	# Updates the time_to_renew and next_renew fields if needed
+	def before_create(timecode)
+		if timecode.renew > 0
+			timecode.time_to_renew = timecode.time
+			timecode.next_renew = Date.today + timecode.renew.day
+		end
+	end
+		
 	def after_create(timecode)
 		Operation.add("operations.sale", "operations.timecode", "operations.create", timecode.code)
 		sale = Sale.new(:amount => timecode.price, :timecode_id => timecode.id)
