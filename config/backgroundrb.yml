@@ -1,0 +1,8 @@
+--- 
+:backgroundrb: 
+  :ip: localhost
+  :port: 11006
+:schedules:
+  :housekeeper_worker:
+    :clean:
+      :trigger_args: 0 * */24 * * *
