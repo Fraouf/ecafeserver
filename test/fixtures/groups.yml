@@ -6,6 +6,16 @@
 # two:
 #   column: value
 
+admins:
+  name: admins
+  price: 0
+  storage: 0
+
+employees:
+  name: employees
+  price: 0
+  storage: 0
+
 students:
   name: students
   price: 0
