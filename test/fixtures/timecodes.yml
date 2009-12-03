@@ -93,3 +93,13 @@
     next_renew: 2009-08-21
     time_to_renew: 30
     
+  renew_today:
+    price: 40
+    expiration: 2012-08-21 14:35:28
+    expires: false
+    time: 0
+    unlimited: false
+    code: 578f9965
+    renew: 30
+    next_renew: <%= Date.today %>
+    time_to_renew: 30

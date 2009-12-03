@@ -46,6 +46,7 @@ td {
 	line-height: 3em;
 	color: white;
 	font-size: 200%;
+	display: inline;
 }
 
 #topbar {
@@ -54,6 +55,13 @@ td {
 	padding: 5px;
 	
 }
+
+a {
+	color: #22A3CD;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+
 
 .tabs {
 	padding-top: 5px;

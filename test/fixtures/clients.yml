@@ -28,3 +28,11 @@
     session_id: a40191f2-76f7-11de-9464-00247e13e797
     state: connected
     user_id: 1
+    
+  invalid:
+    ip_address: 192.168.1.5
+    hostname: invalid
+    port: 65534
+    session_id: a40191f2-76f7-11de-9464-00247e13e798
+    state: available
+    updated_at: <%= Time.now - 2.minutes %>

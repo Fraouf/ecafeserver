@@ -52,9 +52,10 @@ class TimecodeTest < ActiveSupport::TestCase
 	def test_renew_fields_from_model
 		model = models(:thirty_minutes_per_month)
 		timecode = Timecode.new_from_model(model)
+		expected_date = Date.today + model.renew.day
 		assert timecode.save
-		assert_equal timecode.time_to_renew, 30
-		assert_equal timecode.next_renew, Date.today + model.renew.day
+		assert_equal 30, timecode.time_to_renew
+		assert_equal expected_date, timecode.next_renew
 	end
 	
 	def test_validity_of_timecode_to_renew

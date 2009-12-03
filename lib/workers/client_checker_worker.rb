@@ -17,34 +17,21 @@
 # You should have received a copy of the GNU General Public License
 # along with Ecafeserver.  If not, see <http://www.gnu.org/licenses/>.
 
-# This agent performs the following operations on the database 
-# every 24 hours: removes invalid timecodes and renews timecodes that need
-# to be renewed
-
-class HousekeeperWorker < BackgrounDRb::MetaWorker
-	set_worker_name :housekeeper_worker
+class ClientCheckerWorker < BackgrounDRb::MetaWorker
+	set_worker_name :client_checker_worker
 	def create(args = nil)
 		# this method is called, when worker is loaded for the first time
-		
 	end
-	
-	# Cleans the database by removing invalid timecodes and renewing timecodes that
-	# need to be renewed
-	def clean
-		logger.debug("Starting clean task")
-		today = Date.today
-		Timecode.find_each do |timecode|
-			# Destroy if invalid
-			if !timecode.is_valid?
-				timecode.destroy
-			else
-				# Renew if needed
-				if timecode.renew > 0 && timecode.next_renew <= today
-					timecode.update_attributes({:time => timecode.time, :next_renew => today + timecode.renew.day})
-				end
+
+	# Destroys all clients that have not sent a request for 1 minute
+	def check
+		clients = Client.find :all
+		now = Time.now
+		clients.each do |client|
+			if now - client.updated_at > 1.minute
+				client.destroy
 			end
 		end
-		
 	end
 end
 
