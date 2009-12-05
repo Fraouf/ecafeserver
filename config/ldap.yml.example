@@ -1,6 +1,6 @@
 development:
   host: 127.0.0.1
-  base: dc=ecafe,dc=org
+  base: dc=development,dc=ecafe,dc=org
   bind_dn: cn=admin,dc=ecafe,dc=org
   password: secret
 
@@ -13,6 +13,6 @@ test:
 production:
   host: 127.0.0.1
   # method: :tls
-  base: dc=ecafe,dc=org
+  base: dc=production,dc=ecafe,dc=org
   bind_dn: cn=admin,dc=ecafe,dc=org
   password: secret
