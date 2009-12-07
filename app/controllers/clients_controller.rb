@@ -87,7 +87,7 @@ class ClientsController < ApplicationController
 			if @client.state == "connected" && @client.type() == "user"
 				@user = @client.user
 				@clientuser = ClientUser.new
-				@clientuser.name = @user.ldap_entry.givenName
+				@clientuser.name = @user.ldap_entry.givenName + ' ' + @user.ldap_entry.sn
 				@clientuser.email = @user.ldap_entry.mail
 				@clientuser.phone = @user.ldap_entry.homePhone
 				@clientuser.login = @user.ldap_entry.uid
