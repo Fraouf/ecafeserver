@@ -19,11 +19,11 @@
 
 class ClientsController < ApplicationController
 
-	#layout nil
+	layout nil
 
-	#wsdl_service_name 'Clients'
-	#web_service_api ClientsApi
-	#web_service_scaffold :invocation if Rails.env == 'development'
+	wsdl_service_name 'Clients'
+	web_service_api ClientsApi
+	web_service_scaffold :invocation if Rails.env == 'development'
 
 	def register(port, hostname)
 		ip_address = determine_ip(request)
@@ -112,7 +112,7 @@ class ClientsController < ApplicationController
 			else
 				@user = User.find_by_login(login)
 				operation_type = "operations.utilization"
-				operation_controller = "operations.users"
+				operation_controller = "operations.user"
 				operation_action = "operations.connection"
 				if @user.nil?
 					raise XMLRPC::FaultException.new(-4, "Login not found")
