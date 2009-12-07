@@ -52,8 +52,8 @@ class UsersController < ApplicationController
 				# Unlimited quotas for admins and employees
 				@user.quota = APP_CONFIG['qpartition'] + ":0:0:0:0"
 			else
-				soft_limit = @db_group.storage * 1024 * 1024 * APP_CONFIG['block_size']
-				hard_limit = (@db_group.storage + 50) * 1024 * 1024 * APP_CONFIG['block_size']
+				soft_limit = @db_group.storage * APP_CONFIG['block_size']
+				hard_limit = (@db_group.storage + 50) * APP_CONFIG['block_size']
 				@user.quota = APP_CONFIG['qpartition'] + ":" + soft_limit.to_s() + ":" + hard_limit.to_s() + ":0:0"
 			end
 			if @user.save && @db_user.save

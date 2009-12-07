@@ -18,12 +18,24 @@
 # along with Ecafeserver.  If not, see <http://www.gnu.org/licenses/>.
 
 class LdapGroup < ActiveLdap::Base
-  ldap_mapping :dn_attribute => "cn",
-               :prefix => "ou=groups",
-               :classes => ["posixGroup", "top"]
+	ldap_mapping :dn_attribute => "cn",
+				:prefix => "ou=groups",
+				:classes => ["posixGroup", "top"]
 
-  has_many     :members,
-               :class => "LdapUser",
-               :wrap => "memberUid",
-               :primary_key => "uid"
+	has_many     :members,
+				:class => "LdapUser",
+				:wrap => "memberUid",
+				:primary_key => "uid"
+
+	def self.get_next_gid()
+		gids = ActiveLdap::Base.search(:filter => 'uidNumber=*', :attributes => [ 'gidNumber'])
+		max_gid = 1100
+		gids.each do |gid_array|
+			gid = gid_array[1]['gidNumber'][0]
+			if gid.to_i > max_gid
+				max_gid = gid.to_i
+			end
+		end
+		return max_gid + 1
+	end
 end

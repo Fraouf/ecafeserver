@@ -7,14 +7,14 @@
     <th><%= t 'hostname' %></th>
     <th><%= t 'state' %></th>
     <th><%= t 'timecode' %></th>
-    <th><%= t 'customer' %></th>
+    <th><%= t 'user' %></th>
   </tr>
   <% @clients.each do |client| %>
   <tr>
           <td><%= client.hostname %></td>
           <td><%= client.state %></td>
           <td><% if(!client.timecode.nil?) %><%= client.timecode.code %><% end %></td>
-          <td><% if(!client.customer.nil?) %><%= client.customer.uid %><% end %></td>
+          <td><% if(!client.user.nil?) %><%= client.user.uid %><% end %></td>
   </tr>
   <% end %>
 </table>

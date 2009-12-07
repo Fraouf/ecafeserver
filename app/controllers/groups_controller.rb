@@ -36,7 +36,7 @@ class GroupsController < ApplicationController
 		@ldap_group = LdapGroup.new
 		@ldap_group.cn = @group.name
 		@ldap_group.description = params[:description]
-		@ldap_group.gidNumber = get_ldap_gid
+		@ldap_group.gidNumber = LdapGroup.get_next_gid
 		if @group.save && @ldap_group.save
 			if @group.errors.empty?
 				redirect_to :controller=> "groups", :action=> "index"
@@ -82,22 +82,6 @@ class GroupsController < ApplicationController
 			flash[:notice] = t 'groups.deleted_successfully'
 			redirect_to :controller => "groups", :action => "index"
 		end
-	end
-	
-	
-	private
-	
-	# Returns the next available ldap gid
-	def get_ldap_gid()
-		gids = ActiveLdap::Base.search(:base => 'ou=People,dc=ecafe,dc=org', :filter => 'uidNumber=*', :attributes => [ 'gidNumber'])
-		max_gid = 1100
-		gids.each do |gid_array|
-			gid = gid_array[1]['gidNumber'][0]
-			if gid.to_i > max_gid
-				max_gid = gid.to_i
-			end
-		end
-		return max_gid + 1
 	end
 	
 end
