@@ -66,4 +66,16 @@ class LdapUser < ActiveLdap::Base
 		end
 		return false
 	end
+	
+	def self.get_next_uid()
+		uids = ActiveLdap::Base.search(:filter => 'uidNumber=*', :attributes => [ 'uidNumber'])
+		max_uid = 1100
+		uids.each do |uid_array|
+			uid = uid_array[1]['uidNumber'][0]
+			if uid.to_i > max_uid
+				max_uid = uid.to_i
+			end
+		end
+		return max_uid + 1
+	end
 end

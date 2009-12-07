@@ -45,7 +45,7 @@ class UsersController < ApplicationController
 		if authorize_employee(@group.cn, 'new')
 			@user.gid_number = @group.gidNumber
 			@user.cn = @user.givenName + ' ' + @user.sn
-			@user.uid_number = get_ldap_uid()
+			@user.uid_number = LdapUser.get_next_uid
 			@user.home_directory = "/home/" + params[:user][:uid]
 			@user.loginShell = "/bin/bash"
 			if @db_group.name == User::ADMINS_GROUP_NAME || @db_group.name == User::EMPLOYEES_GROUP_NAME

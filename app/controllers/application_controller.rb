@@ -58,19 +58,6 @@ class ApplicationController < ActionController::Base
 		config = Configuration.instance
 		return config.locale
 	end
-	
-	# Returns the next available ldap uid
-	def get_ldap_uid()
-		uids = ActiveLdap::Base.search(:base => 'ou=People,dc=ecafe,dc=org', :filter => 'uidNumber=*', :attributes => [ 'uidNumber'])
-		max_uid = 1100
-		uids.each do |uid_array|
-			uid = uid_array[1]['uidNumber'][0]
-			if uid.to_i > max_uid
-				max_uid = uid.to_i
-			end
-		end
-		return max_uid + 1
-	end
 
 	private
 
