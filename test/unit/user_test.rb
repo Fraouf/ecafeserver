@@ -48,17 +48,26 @@ class UserTest < ActiveSupport::TestCase
 	
 	def test_no_time_left
 		user = users(:no_time_left)
-		assert_equal user.time, 0
+		assert_equal 0, user.time
 	end
 	
 	def test_unlimited_time
 		user = users(:unlimited_time)
-		assert_equal user.time, -1
+		assert_equal -1, user.time
 	end
 	
 	def test_time_left
 		user = users(:time_left)
-		assert_equal user.time, 60
+		assert_equal 60, user.time
 	end
 	
+	def test_admin_unlimited_time
+		user = users(:admin)
+		assert_equal -1, user.time
+	end
+	
+	def test_employee_unlimited_time
+		user = users(:employee)
+		assert_equal -1, user.time
+	end
 end

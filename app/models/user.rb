@@ -131,6 +131,9 @@ class User < ActiveRecord::Base
 	def get_time
 		time = 0
 		unlimited = false
+		if self.is_admin? || self.is_employee?
+			return -1
+		end
 		if self.timecodes.empty?
 			return time
 		else
