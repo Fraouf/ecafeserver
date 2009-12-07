@@ -79,4 +79,20 @@ class GroupsControllerTest < ActionController::TestCase
 		post :update, {:id => group.id, :group => { :name => 'students', :price => 0, :storage => -1}, :description => "Students group"}
 		assert_template 'groups/edit'
 	end
+	
+	def test_should_not_delete_admin_group
+		UserSession.create(users(:admin))
+		group = groups(:admins)
+		assert_no_difference('Group.count') do
+			delete :destroy, :id => group.id
+		end
+	end
+	
+	def test_should_not_delete_employee_group
+		UserSession.create(users(:admin))
+		group = groups(:employees)
+		assert_no_difference('Group.count') do
+			delete :destroy, :id => group.id
+		end
+	end
 end

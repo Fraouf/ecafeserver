@@ -7,7 +7,11 @@
 <%= @group.price%></p>
 
 <p><span style="font-weight: bold;"><%= I18n.t('groups.storage') %></span><br />
-<%= @group.storage %></p>
+<% if @group.storage == 0 %>
+	<%= t 'unlimited' %>
+<% else %>
+	<%= @group.storage %>
+<% end %></p>
 
 <% unless @group.model.nil? %>
 	<p><span style="font-weight: bold;"><%=  I18n.t('model') %></span><br />
@@ -15,7 +19,9 @@
 <% end %>
 
 <br />
-<p><%= link_to I18n.t('edit'), edit_group_path(@group) %> -
-<% form_tag group_path(@group), :method => :delete do %>
+<p><%= link_to I18n.t('edit'), edit_group_path(@group) %>
+<% if @group.name != User::ADMINS_GROUP_NAME && @group.name != User::EMPLOYEES_GROUP_NAME %>
+ - <% form_tag group_path(@group), :method => :delete do %>
   <%= submit_tag(I18n.t('delete'), :confirm => I18n.t('groups.confirm_delete')) %>
+<% end %>
 <% end %></p>

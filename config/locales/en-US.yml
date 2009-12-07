@@ -100,6 +100,7 @@
     edit: "Edit group"
     edit_successful: "The group was successfully edited"
     edit_failed: "Error(s) occured during the modification of the group"
+    delete_failed: "You can not delete that group"
   sessions:
     login_successful: "Successfully logged in"
     logout: "You have been logged out"

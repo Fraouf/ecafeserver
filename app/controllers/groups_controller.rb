@@ -76,11 +76,14 @@ class GroupsController < ApplicationController
 	
 	def destroy
 		@group = Group.find(params[:id])
-		if @group
+		if @group && @group.name != User::ADMINS_GROUP_NAME && @group.name != User::EMPLOYEES_GROUP_NAME
 			@group.ldap_entry.destroy
 			@group.destroy
 			flash[:notice] = t 'groups.deleted_successfully'
 			redirect_to :controller => "groups", :action => "index"
+		else
+			flash[:error] = t 'groups.delete_failed'
+			redirect_to :controller => "groups", :action => "show", :id => @group.id
 		end
 	end
 	

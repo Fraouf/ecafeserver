@@ -101,6 +101,7 @@
     edit: "Edition d'un groupe"
     edit_successful: "Le groupe a bien été édité"
     edit_failed: "Des erreurs sont survenues lors de l'édition du groupe"
+    delete_failed: "Vous ne pouvez pas supprimer ce groupe"
   clients:
     clients: "Ordinateurs clients"
     no_clients_connected: "Aucun ordinateur client connecté"
