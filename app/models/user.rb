@@ -24,11 +24,18 @@ class User < ActiveRecord::Base
 	
 	has_many :timecodes, :dependent => :destroy
 	has_one  :client, :dependent => :destroy
+	belongs_to  :group
 	has_one	 :sale
+	
+	before_destroy :destroy_ldap
 
 	acts_as_authentic do |c|
 		c.validate_password_field = false
 		c.validates_format_of_login_field_options :with => /\A[a-zA-Z0-9]+\z/
+	end
+	
+	def destroy_ldap
+		self.ldap_entry.destroy
 	end
 	
 	def ldap_entry
@@ -61,7 +68,11 @@ class User < ActiveRecord::Base
 	# with the given login
 	def self.create_from_ldap_if_valid(login)
 		begin
-			User.create(:login => login) if LdapUser.find(login)
+			if LdapUser.find(login)
+				user = LdapUser.find(login)
+				group = Group.find_by_name(user.group)
+				User.create(:login => login, :group_id => group.id)
+			end
 		rescue ActiveLdap::EntryNotFound
 			nil # Don't do anything since we can't find an entry
 		end

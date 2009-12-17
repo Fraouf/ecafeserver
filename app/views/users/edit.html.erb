@@ -21,7 +21,7 @@
 <%= f.text_field :homePhone %></p>
 
 <p><%= label_tag 'group', I18n.t('group') %><br />
-<%= select_tag 'group', options_from_collection_for_select(@groups, :cn, :cn, @user.ldap_entry.group) %></p> 
+<%= select_tag 'group', options_from_collection_for_select(@groups, :id, :name, @user.group.id) %></p> 
 
 <p><%= submit_tag t 'edit' %></p>
 <% end -%>

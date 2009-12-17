@@ -40,6 +40,7 @@ class UsersController < ApplicationController
 		# LDAP user
 		@user = LdapUser.new(params[:user])
 		@db_group = Group.find(params[:group])
+		@db_user.group = @db_group
 		@group = @db_group.ldap_entry
 		@groups = Group.find :all
 		if authorize_employee(@group.cn, 'new')
@@ -105,14 +106,19 @@ class UsersController < ApplicationController
 
 	def edit
 		@user = User.find(params[:id])
-		@groups = LdapGroup.find :all
+		@groups = Group.find :all
 	end
 
 	def update
 		@user = User.find(params[:id])
 		@ldapuser = @user.ldap_entry
-		@groups = LdapGroup.find :all
+		@new_db_group = Group.find(params[:group])
+		@old_db_group = @user.group
+		@user.group = @new_db_group
+		@groups = Group.find :all
 		if authorize_employee(@ldapuser.group, 'edit')
+			@old_db_group.ldap_entry.members.delete(@ldapuser)
+			@new_db_group.ldap_entry.members << @ldapuser
 			@ldapuser.givenName = params[:user][:givenName]
 			@ldapuser.sn = params[:user][:sn]
 			@ldapuser.cn = params[:user][:givenName] + ' ' + params[:user][:sn]
@@ -122,6 +128,7 @@ class UsersController < ApplicationController
 			@ldapuser.mail = params[:user][:mail]
 			@ldapuser.homePhone = params[:user][:homePhone]
 			if @ldapuser.save
+				@user.save
 				redirect_to :controller => "users", :action => "index"
 				flash[:notice] = t 'users.edit_successful'
 			else
@@ -133,7 +140,6 @@ class UsersController < ApplicationController
 	def destroy
 		@user = User.find(params[:id])
 		if @user && authorize_employee(@user.ldap_entry.group, 'show')
-			@user.ldap_entry.destroy
 			@user.destroy
 			flash[:notice] = t 'users.deleted_successfully'
 			redirect_to :controller => "users", :action => "index"

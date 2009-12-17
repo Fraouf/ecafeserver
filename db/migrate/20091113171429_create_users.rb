@@ -22,6 +22,7 @@ class CreateUsers < ActiveRecord::Migration
 		create_table :users do |t|
 			t.timestamps
 			t.string :login, :null => false
+			t.references :group
 			t.string :persistence_token, :null => false
 			t.integer :login_count, :default => 0, :null => false
 			t.datetime :last_request_at

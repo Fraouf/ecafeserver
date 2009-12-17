@@ -19,6 +19,7 @@
 
 class Group < ActiveRecord::Base
 	belongs_to :model
+	has_many :users, :dependent => :destroy
 	
 	validates_presence_of :name
 	validates_uniqueness_of :name
@@ -26,6 +27,12 @@ class Group < ActiveRecord::Base
 	validates_numericality_of :price, :only_integer => true, :greater_than_or_equal_to => 0
 	validates_presence_of :storage
 	validates_numericality_of :storage, :only_integer => true, :greater_than_or_equal_to => 0
+	
+	before_destroy :destroy_ldap
+	
+	def destroy_ldap
+		self.ldap_entry.destroy
+	end
 	
 	def ldap_entry
 		if @ldap_entry.nil?
