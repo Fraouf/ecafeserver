@@ -19,11 +19,11 @@
 
 class CreateClients < ActiveRecord::Migration
   def self.up
-    create_table :clients, :id => false do |t|
+    create_table :clients do |t|
       t.string :ip_address, :limit => 40, :null => false
       t.integer :port, :null => false
       t.string :hostname, :null => false
-      t.string :session_id, :limit => 36, :primary => true
+      t.string :session_id, :limit => 36
       t.string :state
       t.references :timecode, :null => true
       t.references :user, :null => true
@@ -31,6 +31,7 @@ class CreateClients < ActiveRecord::Migration
       t.timestamps
     end
     add_index :clients, :ip_address, :unique => true
+    add_index :clients, :session_id, :unique => true
   end
 
   def self.down

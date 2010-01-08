@@ -6,8 +6,7 @@
 :schedules:
   :housekeeper_worker:
     :clean:
-#      :trigger_args: 0 * */24 * * *
-       :trigger_args: */10 * * * * *
+      :trigger_args: 0 * */24 * * *
   :client_checker_worker:
-  	:check:
-  	  :trigger_args: 0 * * * * *
+    :check:
+      :trigger_args: 0 * * * * *

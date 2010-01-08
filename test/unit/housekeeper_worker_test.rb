@@ -25,7 +25,7 @@ class HousekeeperWorkerTest < ActiveSupport::TestCase
 		@worker = HousekeeperWorker.new
 	end
 	
-	def test_epired_timecodes_should_be_removed
+	def test_expired_timecodes_should_be_removed
 		assert_difference('Timecode.count', -2) do
 			@worker.clean
 		end

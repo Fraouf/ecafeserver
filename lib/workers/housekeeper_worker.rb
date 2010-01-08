@@ -21,17 +21,20 @@
 # every 24 hours: removes invalid timecodes and renews timecodes that need
 # to be renewed
 
+require File.dirname(__FILE__) + '/../mock_controller.rb'
+
 class HousekeeperWorker < BackgrounDRb::MetaWorker
+	
 	set_worker_name :housekeeper_worker
 	def create(args = nil)
 		# this method is called, when worker is loaded for the first time
-		
+		Authlogic::Session::Base.controller = Authlogic::ControllerAdapters::RailsAdapter.new(MockController.new)
 	end
 	
 	# Cleans the database by removing invalid timecodes and renewing timecodes that
 	# need to be renewed
 	def clean
-		logger.debug("Starting clean task")
+		logger.debug("dsjfkds");
 		today = Date.today
 		Timecode.find_each do |timecode|
 			# Destroy if invalid
@@ -40,11 +43,12 @@ class HousekeeperWorker < BackgrounDRb::MetaWorker
 			else
 				# Renew if needed
 				if timecode.renew > 0 && timecode.next_renew <= today
-					timecode.update_attributes({:time => timecode.time, :next_renew => today + timecode.renew.day})
+					timecode.update_attributes({:time => timecode.time_to_renew, :next_renew => today + timecode.renew.day})
 				end
 			end
 		end
 		
 	end
+	
 end
 
